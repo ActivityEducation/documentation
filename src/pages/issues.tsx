@@ -195,7 +195,7 @@ export default function IssuesPage(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
+      title={`Known Issues`}
       description="Description will go into a meta tag in <head />">
       <main>
         <Issues />

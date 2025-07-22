@@ -233,7 +233,7 @@ export default function StatusPage(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
+      title={`System Status`}
       description="Description will go into a meta tag in <head />">
       <main>
         <Statuses />
