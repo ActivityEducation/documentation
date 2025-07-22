@@ -1,0 +1,17 @@
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.feature {
+  border-radius: 6px;
+  border: 1px solid lightgray;
+}
+
+.featureSvg {
+  height: 100px;
+  width: 100px;
+  fill: #234b62;
+}
