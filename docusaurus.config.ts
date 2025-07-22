@@ -149,6 +149,14 @@ const config: Config = {
             //   to: '/blog',
             // },
             {
+              label: 'System Status',
+              to: '/status',
+            },
+            {
+              label: 'Known Issues',
+              to: '/issues',
+            },
+            {
               label: 'GitHub',
               href: 'https://github.com/ActivityEducation',
             },

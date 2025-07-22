@@ -1,0 +1,298 @@
+/* issues.module.css */
+
+/* Main container styles */
+.appContainer {
+  max-width: 1000px;
+  margin: auto;
+  padding: 1rem; /* p-4 */
+  font-family: sans-serif; /* font-sans */
+}
+
+@media (min-width: 640px) {
+  /* sm:p-6 */
+  .appContainer {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* lg:p-8 */
+  .appContainer {
+    padding: 2rem;
+  }
+}
+
+/* Header styles */
+.appHeader {
+  background-color: #e4f3ff;
+  border: 1px solid #c7e7ff;
+  color: rgb(4, 52, 74);
+  padding: 1.5rem; /* p-6 */
+  border-radius: 0.5rem; /* rounded-lg */
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+.appTitle {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700; /* font-bold */
+  margin-bottom: 1rem; /* mb-4 */
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  /* sm:text-4xl */
+  .appTitle {
+    font-size: 2.25rem;
+  }
+}
+
+.repoInfo {
+  font-size: 1.125rem; /* text-lg */
+  margin-bottom: 1rem; /* mb-4 */
+  text-align: center;
+}
+
+.repoOwnerBold {
+  font-weight: 700; /* font-bold */
+}
+
+/* Form styles */
+.repoForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* gap-4 */
+}
+
+@media (min-width: 640px) {
+  /* sm:flex-row */
+  .repoForm {
+    flex-direction: row;
+  }
+}
+
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%; /* w-full */
+}
+
+@media (min-width: 640px) {
+  /* sm:w-auto */
+  .formLabel {
+    width: auto;
+  }
+}
+
+.labelText {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 500; /* font-medium */
+  margin-bottom: 0.25rem; /* mb-1 */
+}
+
+.selectField {
+  padding: 0.5rem; /* p-2 */
+  border-radius: 0.375rem; /* rounded-md */
+  border: 1px solid #9ca3af; /* border-gray-400 */
+  background-color: white; /* bg-white */
+  color: #111827; /* text-gray-900 */
+  outline: none; /* focus:outline-none */
+  width: 100%; /* w-full */
+}
+
+.selectField:focus {
+  --tw-ring-color: #3d637b; /* primary: (40) */
+  border-color: #3d637b; /* primary: (40) */
+}
+
+.submitButton {
+  margin-top: 1.5rem; /* mt-6 */
+  padding: 0.5rem 1.5rem; /* px-6 py-2 */
+  background-color: #3d637b; /* primary: (40) */
+  color: white;
+  font-weight: 700; /* font-bold */
+  border-radius: 0.375rem; /* rounded-md */
+  transition-property: background-color; /* transition */
+  transition-duration: 300ms; /* duration-300 */
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* ease-in-out */
+  outline: none; /* focus:outline-none */
+  border: 1px solid #3d637b; /* primary: (40) */
+}
+
+@media (min-width: 640px) {
+  /* sm:mt-0 */
+  .submitButton {
+    margin-top: 0;
+  }
+}
+
+.submitButton:hover {
+  background-color: #234b62; /* primary: (30) */
+}
+
+.submitButton:focus {
+  --tw-ring-color: #3d637b; /* primary: (40) */
+}
+
+/* Main content area styles */
+.mainContent {
+  background-color: white; /* bg-white */
+  padding: 1.5rem; /* p-6 */
+  border-radius: 0.5rem; /* rounded-lg */
+}
+
+/* Loading and error messages */
+.loadingMessage {
+  text-align: center;
+  font-size: 1.125rem; /* text-lg */
+  color: #4b5563; /* text-gray-600 */
+}
+
+.errorMessageContainer {
+  background-color: #fee2e2; /* bg-red-100 */
+  border: 1px solid #ef4444; /* border-red-400 */
+  color: #b91c1c; /* text-red-700 */
+  padding: 1rem; /* px-4 py-3 */
+  border-radius: 0.25rem; /* rounded */
+  position: relative;
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.errorMessageBold {
+  font-weight: 700; /* font-bold */
+}
+
+.errorMessageText {
+  display: block;
+  margin-left: 0.5rem; /* ml-2 */
+}
+
+@media (min-width: 640px) {
+  /* sm:inline */
+  .errorMessageText {
+    display: inline;
+  }
+}
+
+.noIssuesMessage {
+  text-align: center;
+  font-size: 1.125rem; /* text-lg */
+  color: #4b5563; /* text-gray-600 */
+}
+
+/* Issues list and item styles */
+.issuesList {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr)); /* grid-cols-1 */
+  gap: 1.5rem; /* gap-6 */
+  list-style: none; /* remove default list style */
+  padding: 0; /* remove default padding */
+}
+
+@media (min-width: 768px) {
+  /* md:grid-cols-2 */
+  .issuesList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  /* lg:grid-cols-3 */
+  .issuesList {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.issueItem {
+  background-color: white; /* bg-white */
+  padding: 1.25rem; /* p-5 */
+  border-radius: 0.5rem; /* rounded-lg */
+  border: 1px solid #d1d5db; /* border border-gray-300 */
+  transition-property: box-shadow; /* transition-shadow */
+  transition-duration: 300ms; /* duration-300 */
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* ease-in-out */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.issueItem:hover {
+  /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* hover:shadow-md */
+}
+
+.issueTitle {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600; /* font-semibold */
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.issueLink {
+  color: #567c95; /* primary: (50) */
+  text-decoration: none;
+}
+
+.issueLink:hover {
+  text-decoration: underline;
+}
+
+.issueStateText {
+  color: #4b5563; /* text-gray-600 */
+  font-size: 0.875rem; /* text-sm */
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.issueStateBadge {
+  padding-left: 0.5rem; /* px-2 */
+  padding-right: 0.5rem; /* px-2 */
+  padding-top: 0.25rem; /* py-1 */
+  padding-bottom: 0.25rem; /* py-1 */
+  border-radius: 9999px; /* rounded-full */
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 700; /* font-bold */
+}
+
+.issueStateOpen {
+  background-color: #d1fae5; /* bg-green-200 */
+  color: #065f46; /* text-green-800 */
+}
+
+.issueStateClosed {
+  background-color: #fee2e2; /* bg-red-200 */
+  color: #991b1b; /* text-red-800 */
+}
+
+.issueCreated {
+  color: #4b5563; /* text-gray-600 */
+  font-size: 0.875rem; /* text-sm */
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.issueAssignee {
+  color: #4b5563; /* text-gray-600 */
+  font-size: 0.875rem; /* text-sm */
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.issueAssigneeName {
+  font-weight: 500; /* font-medium */
+}
+
+.issueLabelsContainer {
+  margin-top: 0.75rem; /* mt-3 */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem; /* gap-2 */
+}
+
+.issueLabel {
+  padding-left: 0.75rem; /* px-3 */
+  padding-right: 0.75rem; /* px-3 */
+  padding-top: 0.25rem; /* py-1 */
+  padding-bottom: 0.25rem; /* py-1 */
+  border-radius: 9999px; /* rounded-full */
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 600; /* font-semibold */
+  color: #333; /* Default color for contrast */
+}
