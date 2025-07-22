@@ -5,8 +5,11 @@ import Layout from '@theme/Layout';
 
 import style from './status.module.css';
 
+import Heading from '@theme/Heading';
+
 import React, { useState, useEffect } from 'react';
 import { CheckCircle, XCircle, AlertCircle, Loader } from 'lucide-react';
+import clsx from 'clsx';
 
 // Define the type for a single status item
 interface StatusItem {
@@ -171,29 +174,32 @@ const Statuses: React.FC = () => {
   const dependenciesStatuses = statuses.filter(status => !['Database'].includes(status.id));
   const column2Statuses = statuses.filter(status => ['Database'].includes(status.id));
 
+
+  function StatusHeader(props) {
+    const overallStatus = props.overallStatus;
+    return (
+      <header className={clsx('hero hero--primary', style.heroBanner)}>
+        <div className="container">
+          <Heading as="h1" className="hero__title">
+            System Status
+          </Heading>
+          <p className="hero__subtitle">
+            {overallStatus === 'ok' ? (
+              'All systems are operational.'
+            ) : overallStatus === 'degraded' ? (
+              'Some systems are experiencing degraded performance.'
+            ) : (
+              'One or more major systems are experiencing an outage.'
+            )}
+          </p>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <div className={style.container}>
-      {/* Overall System Status */}
-      <div className={`${style.overallStatusCard} ${overallStatusBgClass}`}>
-        <h1 className={`${style.overallStatusTitle} ${overallStatusColorClass}`}>
-          Overall System Status: {overallStatusText}
-        </h1>
-        <p className={`${style.overallStatusDescription} ${overallStatusColorClass}`}>
-          {loading ? (
-            <span className={style.loadingText}>
-              <Loader size={24} className={style.loaderIcon} /> Loading status...
-            </span>
-          ) : error ? (
-            <span className={style.errorText}>{error}</span>
-          ) : overallStatus === 'ok' ? (
-            'All systems are operational.'
-          ) : overallStatus === 'degraded' ? (
-            'Some systems are experiencing degraded performance.'
-          ) : (
-            'One or more major systems are experiencing an outage.'
-          )}
-        </p>
-      </div>
+      <StatusHeader overallStatus={overallStatus} />
 
       {/* Two Columns for Individual Statuses */}
       <div className={style.columnsWrapper}>
