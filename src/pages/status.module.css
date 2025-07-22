@@ -5,7 +5,6 @@
   /* min-height: 100vh; */
   max-width: 1000px;
   margin: auto;
-  /* background-color: #f1f0f2; Neutral 95 - light gray background */
   padding: 1rem; /* p-4 */
   font-family: 'Inter', sans-serif; /* font-sans */
 }
@@ -21,7 +20,7 @@
 .overallStatusCard {
   padding: 1.5rem; /* p-6 */
   margin-bottom: 1.5rem; /* mb-6 */
-  border-radius: 0.75rem; /* rounded-xl */
+  border-radius: 4px; /* rounded-xl */
   text-align: center; /* text-center */
 }
 
@@ -37,10 +36,11 @@
 
 /* Overall Status Colors */
 .overallStatusOkText {
-  color: #005313; /* Secondary 30 */
+  color: #153f56; /* Secondary 30 */
 }
 .overallStatusOkBg {
-  background-color: #ecffe4; /* Secondary 98 */
+  background-color: #e4f3ff; /* Secondary 98 */
+  border: 1px solid #c7e7ff; /* Secondary 90 */
 }
 
 .overallStatusDegradedText {
@@ -108,7 +108,7 @@
   flex: 1; /* flex-1 */
   background-color: #ffffff; /* bg-white */
   padding: 1rem; /* p-4 */
-  border-radius: 0.75rem; /* rounded-xl */
+  border-radius: 4px; /* rounded-xl */
 }
 
 .columnTitle {
@@ -116,7 +116,7 @@
   font-weight: 700; /* font-bold */
   color: #234b62; /* Primary 30 */
   margin-bottom: 1rem; /* mb-4 */
-  border-bottom: 1px solid #c7e7ff; /* Primary 90 */
+  /* border-bottom: 1px solid #c7e7ff; Primary 90 */
   padding-bottom: 0.5rem; /* pb-2 */
 }
 
@@ -127,7 +127,7 @@
   padding: 0.75rem; /* p-3 */
   margin-top: 0.5rem; /* my-2 */
   margin-bottom: 0.5rem; /* my-2 */
-  border-radius: 0.5rem; /* rounded-lg */
+  border-radius: 4px; /* rounded-lg */
   border: 1px solid #e2e2e4; /* Neutral 90 */
 }
 
@@ -153,7 +153,7 @@
 
 /* Individual Status Item Colors */
 .statusUpText {
-  color: #006e1c; /* Secondary 40 */
+  color: #22892f; /* Secondary 40 */
 }
 .statusUpBg {
   background-color: #f6fff0; /* Secondary 99 */

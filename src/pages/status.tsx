@@ -168,8 +168,8 @@ const Statuses: React.FC = () => {
       overallStatusBgClass = style.overallStatusUnknownBg;
   }
 
-  const column1Statuses = statuses.slice(0, Math.ceil(statuses.length / 2));
-  const column2Statuses = statuses.slice(Math.ceil(statuses.length / 2));
+  const dependenciesStatuses = statuses.filter(status => !['Database'].includes(status.id));
+  const column2Statuses = statuses.filter(status => ['Database'].includes(status.id));
 
   return (
     <div className={style.container}>
@@ -204,16 +204,16 @@ const Statuses: React.FC = () => {
             <div className={style.loadingMessage}>Loading service statuses...</div>
           ) : error ? (
             <div className={style.errorMessage}>Error loading services.</div>
-          ) : statuses.length === 0 ? (
+          ) : column2Statuses.length === 0 ? (
             <div className={style.noStatusesMessage}>No service statuses available.</div>
           ) : (
-            column1Statuses.map(renderStatusItem)
+            column2Statuses.map(renderStatusItem)
           )}
         </div>
 
         {/* Column 2 */}
         <div className={style.column}>
-          <h2 className={style.columnTitle}>Auxiliary Services</h2>
+          <h2 className={style.columnTitle}>System Resources</h2>
           {loading ? (
             <div className={style.loadingMessage}>Loading service statuses...</div>
           ) : error ? (
@@ -221,7 +221,7 @@ const Statuses: React.FC = () => {
           ) : statuses.length === 0 ? (
             <div className={style.noStatusesMessage}>No service statuses available.</div>
           ) : (
-            column2Statuses.map(renderStatusItem)
+            dependenciesStatuses.map(renderStatusItem)
           )}
         </div>
       </div>
