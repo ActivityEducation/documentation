@@ -90,6 +90,7 @@ const config: Config = {
           position: 'left',
           label: 'Documentation',
         },
+        {to: '/status', label: 'Status', position: 'left'},
         // {to: '/blog', label: 'Blog', position: 'left'},
         // {to: '/donate', label: 'Donate', position: 'left'},
         {

@@ -1,0 +1,195 @@
+/* App.module.css */
+
+/* Base styles for the container */
+.container {
+  /* min-height: 100vh; */
+  max-width: 1000px;
+  margin: auto;
+  background-color: #f1f0f2; /* Neutral 95 - light gray background */
+  padding: 1rem; /* p-4 */
+  font-family: 'Inter', sans-serif; /* font-sans */
+}
+
+/* Responsive padding for larger screens (sm:p-6) */
+@media (min-width: 640px) {
+  .container {
+    padding: 1.5rem; /* sm:p-6 */
+  }
+}
+
+/* Overall System Status Card */
+.overallStatusCard {
+  padding: 1.5rem; /* p-6 */
+  margin-bottom: 1.5rem; /* mb-6 */
+  border-radius: 0.75rem; /* rounded-xl */
+  text-align: center; /* text-center */
+}
+
+.overallStatusTitle {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 800; /* font-extrabold */
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.overallStatusDescription {
+  font-size: 1.125rem; /* text-lg */
+}
+
+/* Overall Status Colors */
+.overallStatusOkText {
+  color: #005313; /* Secondary 30 */
+}
+.overallStatusOkBg {
+  background-color: #ecffe4; /* Secondary 98 */
+}
+
+.overallStatusDegradedText {
+  color: #3a4953; /* Tertiary 30 */
+}
+.overallStatusDegradedBg {
+  background-color: #e4f3ff; /* Tertiary 95 */
+}
+
+.overallStatusCriticalText {
+  color: #93000a; /* Error 30 */
+}
+.overallStatusCriticalBg {
+  background-color: #fff8f7; /* Error 98 */
+}
+
+.overallStatusUnknownText {
+  color: #454749; /* Neutral 30 */
+}
+.overallStatusUnknownBg {
+  background-color: #f1f0f2; /* Neutral 95 */
+}
+
+/* Loading and Error messages for overall status */
+.loadingText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loaderIcon {
+  animation: spin 1s linear infinite; /* animate-spin */
+  margin-right: 0.5rem; /* mr-2 */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.errorText {
+  color: #93000a; /* Error 30 */
+}
+
+/* Two Columns Layout */
+.columnsWrapper {
+  display: flex; /* flex */
+  flex-direction: column; /* flex-col */
+  gap: 1.5rem; /* gap-6 */
+}
+
+/* Responsive columns for medium screens and up (md:flex-row) */
+@media (min-width: 768px) {
+  .columnsWrapper {
+    flex-direction: column; /* md:flex-row */
+  }
+}
+
+/* Individual Column Styling */
+.column {
+  flex: 1; /* flex-1 */
+  background-color: #ffffff; /* bg-white */
+  padding: 1rem; /* p-4 */
+  border-radius: 0.75rem; /* rounded-xl */
+}
+
+.columnTitle {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700; /* font-bold */
+  color: #234b62; /* Primary 30 */
+  margin-bottom: 1rem; /* mb-4 */
+  border-bottom: 1px solid #c7e7ff; /* Primary 90 */
+  padding-bottom: 0.5rem; /* pb-2 */
+}
+
+/* Individual Status Item */
+.statusItem {
+  display: flex; /* flex */
+  align-items: center; /* items-center */
+  padding: 0.75rem; /* p-3 */
+  margin-top: 0.5rem; /* my-2 */
+  margin-bottom: 0.5rem; /* my-2 */
+  border-radius: 0.5rem; /* rounded-lg */
+  border: 1px solid #e2e2e4; /* Neutral 90 */
+}
+
+.statusIcon {
+  margin-right: 0.75rem; /* mr-3 */
+}
+
+.statusName {
+  font-weight: 600; /* font-semibold */
+  color: #1a1c1d; /* Neutral 10 */
+  margin-bottom: 0px;
+}
+
+.statusMessage {
+  font-size: 0.875rem; /* text-sm */
+  margin-bottom: 0px;
+}
+
+.statusDetailMessage {
+  margin-left: 0.5rem; /* ml-2 */
+  color: #5d5e60; /* Neutral 40 */
+}
+
+/* Individual Status Item Colors */
+.statusUpText {
+  color: #006e1c; /* Secondary 40 */
+}
+.statusUpBg {
+  background-color: #f6fff0; /* Secondary 99 */
+}
+
+.statusDownText {
+  color: #ba1a1a; /* Error 40 */
+}
+.statusDownBg {
+  background-color: #fff8f7; /* Error 98 */
+}
+
+.statusWarningText {
+  color: #51606b; /* Tertiary 40 */
+}
+.statusWarningBg {
+  background-color: #f5faff; /* Tertiary 98 */
+}
+
+.statusDefaultText {
+  color: #515254; /* Neutral 35 */
+}
+.statusDefaultBg {
+  background-color: #fcfcfe; /* Neutral 99 */
+}
+
+/* Loading/Error/No Status messages in columns */
+.loadingMessage,
+.errorMessage,
+.noStatusesMessage {
+  text-align: center; /* text-center */
+  color: #767779; /* Neutral 50 */
+  padding-top: 1rem; /* py-4 */
+  padding-bottom: 1rem; /* py-4 */
+}
+
+.errorMessage {
+  color: #ba1a1a; /* Error 40 */
+}
