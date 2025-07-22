@@ -80,8 +80,8 @@ const config: Config = {
     navbar: {
       title: 'EduPub',
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.png',
+        alt: 'Education Pub Logo',
+        src: 'img/logo-nobg.png',
       },
       items: [
         {
