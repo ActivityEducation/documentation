@@ -1,13 +1,13 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
+import { themes as prismThemes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'EducationPub',
-  tagline: 'Your Open Learning Network',
-  favicon: 'img/favicon.ico',
+  title: "EducationPub",
+  tagline: "Your Open Learning Network",
+  favicon: "img/favicon.ico",
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -15,55 +15,55 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://docs.bleauweb.org',
+  url: "https://docs.bleauweb.org",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: "/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'BleauWeb', // Usually your GitHub org/user name.
-  projectName: 'EducationPub', // Usually your repo name.
+  organizationName: "BleauWeb", // Usually your GitHub org/user name.
+  projectName: "EducationPub", // Usually your repo name.
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
 
   presets: [
     [
-      'classic',
+      "classic",
       {
         docs: {
-          sidebarPath: './sidebars.ts',
+          sidebarPath: "./sidebars.ts",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
         },
         blog: {
           showReadingTime: true,
           feedOptions: {
-            type: ['rss', 'atom'],
+            type: ["rss", "atom"],
             xslt: true,
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
           // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+          onInlineTags: "warn",
+          onInlineAuthors: "warn",
+          onUntruncatedBlogPosts: "warn",
         },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
       } satisfies Preset.Options,
     ],
@@ -71,61 +71,64 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: "img/docusaurus-social-card.jpg",
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: "light",
       disableSwitch: true,
       respectPrefersColorScheme: false,
     },
+    stylesheets: [
+      "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css",
+    ],
     navbar: {
-      title: 'EduPub',
+      title: "EduPub",
       logo: {
-        alt: 'Education Pub Logo',
-        src: 'img/logo-nobg.png',
+        alt: "Education Pub Logo",
+        src: "img/logo-nobg.png",
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Documentation',
+          type: "docSidebar",
+          sidebarId: "tutorialSidebar",
+          position: "left",
+          label: "Documentation",
         },
-        {to: '/status', label: 'Status', position: 'left'},
+        { to: "/status", label: "Status", position: "left" },
         // {to: '/blog', label: 'Blog', position: 'left'},
         // {to: '/donate', label: 'Donate', position: 'left'},
         {
-          href: 'https://github.com/ActivityEducation',
-          label: 'GitHub',
-          position: 'right',
+          href: "https://github.com/ActivityEducation",
+          label: "GitHub",
+          position: "right",
         },
       ],
     },
     footer: {
-      style: 'dark',
+      style: "dark",
       links: [
         {
-          title: 'Docs',
+          title: "Docs",
           items: [
             {
-              label: 'What is EducationPub?',
-              to: '/docs/intro',
+              label: "What is EducationPub?",
+              to: "/docs/intro",
             },
             {
-              label: 'Using EducationPub',
-              to: '/docs/category/using-educationpub',
+              label: "Using EducationPub",
+              to: "/docs/category/using-educationpub",
             },
             {
-              label: 'Running EducationPub',
-              to: '/docs/category/running-educationpub',
+              label: "Running EducationPub",
+              to: "/docs/category/running-educationpub",
             },
             {
-              label: 'Specification',
-              to: '/docs/specifications/Draft-EducationPub_Vocabulary_Specification',
-            }
+              label: "Specification",
+              to: "/docs/specifications/Draft-EducationPub_Vocabulary_Specification",
+            },
           ],
         },
         {
-          title: 'Community',
+          title: "Community",
           items: [
             // {
             //   label: 'Stack Overflow',
@@ -142,24 +145,27 @@ const config: Config = {
           ],
         },
         {
-          title: 'More',
+          title: "More",
           items: [
             // {
             //   label: 'Blog',
             //   to: '/blog',
             // },
             {
-              label: 'System Status',
-              to: '/status',
+              label: "System Status",
+              to: "/status",
             },
             {
-              label: 'Known Issues',
-              to: '/issues',
+              label: "Known Issues",
+              to: "/issues",
             },
-            {href: 'https://design.edupub.social', label: 'Component Library' },
             {
-              label: 'GitHub',
-              href: 'https://github.com/ActivityEducation',
+              href: "https://design.edupub.social",
+              label: "Component Library",
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/ActivityEducation",
             },
           ],
         },
