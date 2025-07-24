@@ -5,7 +5,7 @@ title: EducationPub Vocabulary Specification
 
 # **EducationPub Vocabulary Specification**
 
-## **EduPub Draft 22 July 2025**
+## **EduPub Draft 23 July 2025**
 
 ### **Abstract**
 

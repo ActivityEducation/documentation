@@ -120,7 +120,7 @@ const config: Config = {
             },
             {
               label: 'Specification',
-              to: '/docs/EducationPub%20Specification',
+              to: '/docs/specifications/Draft-EducationPub_Vocabulary_Specification',
             }
           ],
         },
