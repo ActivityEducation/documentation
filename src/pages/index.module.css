@@ -14,12 +14,6 @@
   background-repeat: no-repeat;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
-}
-
 .headerText {
   margin-top: 20px;
   font-size: 32px;
@@ -47,18 +41,41 @@
 }
 
 .videoPlayer {
+  display: block;
+  grid-area: videoPlayer;
   justify-self: center;
   align-self: center;
   margin: auto;
   min-width: 500px;
 }
 
+.videoContent {
+  display: block;
+  grid-area: videoContent;
+  margin: auto;
+}
+
 .videoContainer {
-  display: flex;
+  display: grid;
+  grid-template: "videoPlayer videoContent";
   max-width: 1000px;
-  flex-direction: row;
   margin: auto;
   gap: 20px;
   width: 100%;
   padding: 20px;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+
+  .videoContainer {
+    grid-template: "videoContent" "videoPlayer";
+  }
+
+  .videoPlayer {
+    min-width: 430px;
+    width: 100%;
+  }
 }
