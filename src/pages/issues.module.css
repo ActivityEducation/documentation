@@ -22,8 +22,17 @@
   }
 }
 
+.footerText {
+  margin: 0px;
+  padding: 0px;
+  font-size: 8px;
+  text-align: center;
+}
+
 /* Header styles */
 .appHeader {
+  max-width: unset !important;
+  width: 100%;
   background-color: #e4f3ff;
   border: 1px solid #c7e7ff;
   color: rgb(4, 52, 74);
@@ -138,9 +147,11 @@
 
 /* Main content area styles */
 .mainContent {
+  width: 100%;
   background-color: white; /* bg-white */
   padding: 1.5rem; /* p-6 */
   border-radius: 0.5rem; /* rounded-lg */
+  max-width: unset !important;
 }
 
 /* Loading and error messages */

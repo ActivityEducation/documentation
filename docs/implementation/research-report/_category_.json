@@ -1,0 +1,8 @@
+{
+  "label": "Research Reports",
+  "position": 0,
+  "link": {
+    "type": "generated-index",
+    "description": "A collection of research reports generated using Gemini Deep Research."
+  }
+}

@@ -156,6 +156,7 @@ const config: Config = {
               label: 'Known Issues',
               to: '/issues',
             },
+            {href: 'https://design.edupub.social', label: 'Component Library' },
             {
               label: 'GitHub',
               href: 'https://github.com/ActivityEducation',

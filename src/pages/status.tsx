@@ -9,6 +9,9 @@ import Heading from '@theme/Heading';
 
 import React, { useState, useEffect } from 'react';
 import { CheckCircle, XCircle, AlertCircle, Loader } from 'lucide-react';
+
+import { Card } from '@activityeducation/component-library';
+
 import clsx from 'clsx';
 
 // Define the type for a single status item
@@ -204,8 +207,7 @@ const Statuses: React.FC = () => {
       {/* Two Columns for Individual Statuses */}
       <div className={style.columnsWrapper}>
         {/* Column 1 */}
-        <div className={style.column}>
-          <h2 className={style.columnTitle}>Core Services</h2>
+        <Card className={style.column} title="Core Services">
           {loading ? (
             <div className={style.loadingMessage}>Loading service statuses...</div>
           ) : error ? (
@@ -215,11 +217,10 @@ const Statuses: React.FC = () => {
           ) : (
             column2Statuses.map(renderStatusItem)
           )}
-        </div>
+        </Card>
 
         {/* Column 2 */}
-        <div className={style.column}>
-          <h2 className={style.columnTitle}>System Resources</h2>
+        <Card className={style.column} title="System Resources">
           {loading ? (
             <div className={style.loadingMessage}>Loading service statuses...</div>
           ) : error ? (
@@ -229,7 +230,7 @@ const Statuses: React.FC = () => {
           ) : (
             dependenciesStatuses.map(renderStatusItem)
           )}
-        </div>
+        </Card>
       </div>
     </div>
   );

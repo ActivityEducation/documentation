@@ -8,6 +8,7 @@ import axios from 'axios';
 // In a real React project, you would import a CSS Module like this:
 import styles from './issues.module.css'; // Importing styles from the new module file
 
+import { Card } from '@activityeducation/component-library';
 
 // Main App component
 function Issues() {
@@ -82,10 +83,7 @@ function Issues() {
     // Main container for the application with responsive padding and background
     <div className={styles.appContainer}>
       {/* Header section with title and input form */}
-      <header className={styles.appHeader}>
-        <h1 className={styles.appTitle}>Known Issues</h1>
-        
-        {/* Form for repository input and issue state filter */}
+      <Card className={styles.appHeader} title="Issue Tracker" actions={
         <form onSubmit={handleSubmit} className={styles.repoForm}>
           {/* Removed repository owner input */}
           <label className={styles.formLabel}>
@@ -95,8 +93,9 @@ function Issues() {
               onChange={handleRepoChange}
               className={styles.selectField}
             >
-              <option value="backend">backend</option>
-              <option value="documentation">documentation</option>
+              <option value="backend">Backend</option>
+              <option value="documentation">Documentation</option>
+              <option value="component-library">Component Library</option>
             </select>
           </label>
           <label className={styles.formLabel}>
@@ -117,11 +116,7 @@ function Issues() {
           >
             Load Issues
           </button>
-        </form>
-      </header>
-
-      {/* Main content area for displaying issues */}
-      <main className={styles.mainContent}>
+        </form>}>
         {/* Loading indicator */}
         {loading && <p className={styles.loadingMessage}>Loading issues...</p>}
         
@@ -186,7 +181,8 @@ function Issues() {
             ))}
           </ul>
         )}
-      </main>
+      </Card>
+      <p className={styles.footerText}>Powered by GitHub</p>
     </div>
   );
 }
