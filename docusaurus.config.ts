@@ -79,6 +79,7 @@ const config: Config = {
     },
     stylesheets: [
       "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css",
+      "src/css/variables.css"
     ],
     navbar: {
       title: "EduPub",
