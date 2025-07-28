@@ -15,9 +15,10 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@activityeducation/component-library": "^1.0.3",
+    "@activityeducation/component-library": "^1.0.11",
     "@docusaurus/core": "3.8.1",
     "@docusaurus/preset-classic": "3.8.1",
+    "@docusaurus/theme-mermaid": "^3.8.1",
     "@mdx-js/react": "^3.0.0",
     "axios": "^1.10.0",
     "clsx": "^2.0.0",
