@@ -127,7 +127,7 @@ const config: Config = {
             },
             {
               label: "Specification",
-              to: "/docs/specifications/Draft-EducationPub_Vocabulary_Specification",
+              to: "/docs/implementation/Specification",
             },
           ],
         },
