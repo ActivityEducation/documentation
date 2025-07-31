@@ -1,4 +1,8 @@
-# **What is EducationPub?**
+---
+sidebar_position: 1
+---
+
+# What is EducationPub?
 
 EducationPub is a free, open-source learning network built on the idea that education should be open, collaborative, and tailored to you. It empowers educators and learners to create, share, and discover educational materials in a vibrant, interconnected community.  
 Imagine a world where a high school German teacher can easily share her custom vocabulary flashcards with her students, a self-studier can find interactive quizzes that adapt to his learning style, and a learner with dyslexia can access materials with built-in audio and visual aids. This is the world EducationPub is building.
