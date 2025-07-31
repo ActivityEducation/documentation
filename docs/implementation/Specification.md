@@ -1,11 +1,12 @@
 ---
-sidebar_position: 1
-title: EducationPub Vocabulary Specification
+title: EducationPub Specification
 ---
 
 # **EducationPub Vocabulary Specification**
 
 ## **EduPub Draft 28 July 2025**
+
+**Version:** 1.1
 
 ### **Abstract**
 
