@@ -36,12 +36,12 @@ This final phase ensures that the powerful new features are deployed smoothly, a
 
 * **Expose Metrics:** Integrate the prom-client library into the application. Create a /metrics endpoint that Prometheus can scrape.  
 * **Key Metrics to Track:**  
-  * bullmq_queue_size{queue="fsrs-optimization"}  
-  * bullmq_queue_size{queue="complexity"}  
-  * fsrs_optimization_jobs_processed_total (Counter)  
-  * fsrs_optimization_job_duration_seconds (Histogram)  
-  * cdc_calculation_job_duration_seconds (Histogram)  
-  * jobs_failed_total{queue="fsrs-optimization"} (Counter)  
+  * `bullmq_queue_size{queue="fsrs-optimization"}`
+  * `bullmq_queue_size{queue="complexity"}`
+  * `fsrs_optimization_jobs_processed_total (Counter)`  
+  * `fsrs_optimization_job_duration_seconds (Histogram)`  
+  * `cdc_calculation_job_duration_seconds (Histogram)`  
+  * `jobs_failed_total{queue="fsrs-optimization"} (Counter)`  
 * **Grafana Dashboard:** Create a new dashboard in Grafana to visualize these metrics.  
 * **Alerting:** Set up alerts in Prometheus/Alertmanager to notify the team of critical issues, such as a queue growing uncontrollably or a high rate of job failures.
 
