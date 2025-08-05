@@ -1,0 +1,8 @@
+{
+  "label": "Progress Reports",
+  "position": 0,
+  "link": {
+    "type": "generated-index",
+    "description": "Reports on the current state of the system vs the future vision"
+  }
+}
