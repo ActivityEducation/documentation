@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 const DocusaurusStyles = () => (
     <style>{`
         .book-library-container {
-            max-width: 1140px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem 1rem;
         }
@@ -47,8 +47,14 @@ const DocusaurusStyles = () => (
 
         .book-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .book-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .book-card-footer {
@@ -128,6 +134,20 @@ const DocusaurusStyles = () => (
         .typeahead-suggestions li:hover {
             background-color: var(--ifm-color-emphasis-100);
         }
+
+        /* Pagination Styles */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .pagination-info {
+            font-size: 0.9rem;
+            color: var(--ifm-font-color-secondary);
+        }
     `}</style>
 );
 
@@ -153,7 +173,9 @@ const BookLibrary = () => {
     const [currentBook, setCurrentBook] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [filterGenre, setFilterGenre] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
     const importFileRef = useRef(null);
+    const BOOKS_PER_PAGE = 6;
 
     // --- LocalStorage Data Fetching ---
     useEffect(() => {
@@ -192,6 +214,7 @@ const BookLibrary = () => {
             tempBooks = tempBooks.filter(book => book.genre === filterGenre);
         }
         setFilteredBooks(tempBooks);
+        setCurrentPage(1); // Reset to first page on new filter/search
     }, [searchTerm, filterGenre, books]);
 
     // --- Form Handlers ---
@@ -275,10 +298,16 @@ const BookLibrary = () => {
     const uniqueLocations = useMemo(() => [...new Set(books.map(b => b.location).filter(Boolean))], [books]);
     const uniqueTags = useMemo(() => [...new Set(books.flatMap(b => (b.tags || '').split(',')).map(t => t.trim()).filter(Boolean))], [books]);
 
+    // --- Pagination Logic ---
+    const totalPages = Math.ceil(filteredBooks.length / BOOKS_PER_PAGE);
+    const startIndex = (currentPage - 1) * BOOKS_PER_PAGE;
+    const endIndex = startIndex + BOOKS_PER_PAGE;
+    const currentBooks = filteredBooks.slice(startIndex, endIndex);
+
     return (
         <div className="book-library-container">
             <header className="library-header">
-                 <h1>Personal Library Manager</h1>
+                 <h1>My Personal Library</h1>
                  <p className="p--small">Data stored locally in your browser</p>
             </header>
 
@@ -313,18 +342,64 @@ const BookLibrary = () => {
             {isLoading ? (
                 <div style={{textAlign: 'center', padding: '2rem'}}><p>Loading your books...</p></div>
             ) : (
-                filteredBooks.length > 0 ? (
-                    <div className="book-grid">
-                        {filteredBooks.map(book => <BookCard key={book.id} book={book} onEdit={handleShowEditForm} onDelete={handleDeleteBook} />)}
-                    </div>
-                ) : (
-                    <div className="card">
-                        <div className="card__body" style={{ textAlign: 'center' }}>
-                            <p>No books found.</p>
+                <>
+                    {filteredBooks.length > 0 ? (
+                        <div className="book-grid">
+                            {currentBooks.map(book => <BookCard key={book.id} book={book} onEdit={handleShowEditForm} onDelete={handleDeleteBook} />)}
                         </div>
-                    </div>
-                )
+                    ) : (
+                        <div className="card">
+                            <div className="card__body" style={{ textAlign: 'center' }}>
+                                <p>No books found.</p>
+                            </div>
+                        </div>
+                    )}
+                    {totalPages > 1 && (
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={(page) => setCurrentPage(page)}
+                        />
+                    )}
+                </>
             )}
+        </div>
+    );
+};
+
+// --- Pagination Component ---
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+    const handlePrevious = () => {
+        if (currentPage > 1) {
+            onPageChange(currentPage - 1);
+        }
+    };
+
+    const handleNext = () => {
+        if (currentPage < totalPages) {
+            onPageChange(currentPage + 1);
+        }
+    };
+
+    return (
+        <div className="pagination-container">
+            <button
+                onClick={handlePrevious}
+                disabled={currentPage === 1}
+                className="button button--secondary"
+            >
+                Previous
+            </button>
+            <span className="pagination-info">
+                Page {currentPage} of {totalPages}
+            </span>
+            <button
+                onClick={handleNext}
+                disabled={currentPage === totalPages}
+                className="button button--secondary"
+            >
+                Next
+            </button>
         </div>
     );
 };
