@@ -307,7 +307,7 @@ const BookLibrary = () => {
     return (
         <div className="book-library-container">
             <header className="library-header">
-                 <h1>My Personal Library</h1>
+                 <h1>Personal Library Manager</h1>
                  <p className="p--small">Data stored locally in your browser</p>
             </header>
 
