@@ -1,0 +1,420 @@
+[
+  {
+    "name": "das letzte Mal",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "das letzte Mal",
+      "definition": "the last time"
+    },
+    "eduTags": ["phrase"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "seit einer Weile",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "seit einer Weile",
+      "definition": "for a while"
+    },
+    "eduTags": ["phrase"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "zahnen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "zahnen",
+      "definition": "to teethe"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "satt haben",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "satt haben",
+      "definition": "to be fed up"
+    },
+    "eduTags": ["idiom", "verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "zeigen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "zeigen",
+      "definition": "to show"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "erzählen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "erzählen",
+      "definition": "to tell (a story)"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "zählen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "zählen",
+      "definition": "to count"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "langweilig",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "langweilig",
+      "definition": "boring"
+    },
+    "eduTags": ["adjective"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "geschaut",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "geschaut",
+      "definition": "watched"
+    },
+    "eduTags": ["verb", "past-participle"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "das Werkzeug",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "das Werkzeug",
+      "definition": "manual tool"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "das Lernmittel",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "das Lernmittel",
+      "definition": "learning tool"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "das Mittel",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "das Mittel",
+      "definition": "agent, remedy, means"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "das Putzmittel",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "das Putzmittel",
+      "definition": "cleaning product"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "die Mitte",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "die Mitte",
+      "definition": "the middle"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "das Videospiel",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "das Videospiel",
+      "definition": "the video game"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "die Unterbrechung",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "die Unterbrechung",
+      "definition": "the interruption"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "ins Bett gehen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "ins Bett gehen",
+      "definition": "to go to bed"
+    },
+    "eduTags": ["phrase", "verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "die Schlafstörung",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "die Schlafstörung",
+      "definition": "insomnia"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "am nächsten Morgen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "am nächsten Morgen",
+      "definition": "(on) the next morning"
+    },
+    "eduTags": ["phrase", "time"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "an und ab",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "an und ab",
+      "definition": "on and off"
+    },
+    "eduTags": ["phrase", "idiom"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "sparsam",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "sparsam",
+      "definition": "frugal, sparingly"
+    },
+    "eduTags": ["adjective", "adverb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "zurückhaltend",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "zurückhaltend",
+      "definition": "reserved, sparingly"
+    },
+    "eduTags": ["adjective"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "beruhigend",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "beruhigend",
+      "definition": "calming"
+    },
+    "eduTags": ["adjective"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "die Ruhe",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "die Ruhe",
+      "definition": "the calm, quiet"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "ruhig",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "ruhig",
+      "definition": "quiet"
+    },
+    "eduTags": ["adjective"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "unruhig",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "unruhig",
+      "definition": "restless"
+    },
+    "eduTags": ["adjective"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "der Vertrag",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "der Vertrag",
+      "definition": "the contract"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "benennen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "benennen",
+      "definition": "to name"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "geben",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "geben",
+      "definition": "to give"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "der Papagei",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "der Papagei",
+      "definition": "parrot"
+    },
+    "eduTags": ["noun", "animal"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "stillstehen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "stillstehen",
+      "definition": "to stand still"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "toll finden",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "toll finden",
+      "definition": "to think it is great"
+    },
+    "eduTags": ["phrase", "idiom"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "gar nicht",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "gar nicht",
+      "definition": "not at all"
+    },
+    "eduTags": ["phrase"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "manchen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "manchen",
+      "definition": "some"
+    },
+    "eduTags": ["pronoun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "vielleicht",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "vielleicht",
+      "definition": "maybe"
+    },
+    "eduTags": ["adverb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "vorbeikommen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "vorbeikommen",
+      "definition": "to drop by"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "zuhalten",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "zuhalten",
+      "definition": "to keep closed"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "Schluss sein",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "Schluss sein",
+      "definition": "to be done, finished"
+    },
+    "eduTags": ["phrase", "idiom"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  }
+]

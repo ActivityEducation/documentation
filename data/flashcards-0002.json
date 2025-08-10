@@ -1,0 +1,200 @@
+[
+  {
+    "name": "Geld ausgeben",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "Geld ausgeben",
+      "definition": "to spend money"
+    },
+    "eduTags": ["phrase", "verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "der Gutschein",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "der Gutschein",
+      "definition": "coupon"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "klatschen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "klatschen",
+      "definition": "to clap"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "die Mahlzeit",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "die Mahlzeit",
+      "definition": "the meal"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "reagieren",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "reagieren",
+      "definition": "to react"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "mit anderen Menschen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "mit anderen Menschen",
+      "definition": "with other people"
+    },
+    "eduTags": ["phrase"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "der Ehemann",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "der Ehemann",
+      "definition": "husband"
+    },
+    "eduTags": ["noun", "family"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "die Tochter",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "die Tochter",
+      "definition": "daughter"
+    },
+    "eduTags": ["noun", "family"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "die Pflege",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "die Pflege",
+      "definition": "the care"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "die Unterstützung",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "die Unterstützung",
+      "definition": "the support"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "erhalten",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "erhalten",
+      "definition": "to receive"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "zuvorkommend sein",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "zuvorkommend sein",
+      "definition": "to be courteous"
+    },
+    "eduTags": ["phrase", "verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "eine gute Menge",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "eine gute Menge",
+      "definition": "a good amount"
+    },
+    "eduTags": ["phrase"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "erwerben",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "erwerben",
+      "definition": "to gain"
+    },
+    "eduTags": ["verb"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "die Fähigkeit",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "die Fähigkeit",
+      "definition": "the ability"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "sich vorstellen",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "sich vorstellen",
+      "definition": "to introduce"
+    },
+    "eduTags": ["verb", "reflexive"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "die Werkstatt",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "die Werkstatt",
+      "definition": "workshop"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  },
+  {
+    "name": "die Beeinträchtigung",
+    "eduModel": "http://localhost/api/objects/75e6a105-716b-4689-a682-c2b67a3922f9",
+    "eduFieldsData": {
+      "term": "die Beeinträchtigung",
+      "definition": "the limitation"
+    },
+    "eduTags": ["noun"],
+    "eduTargetLanguage": "de",
+    "eduSourceLanguage": "en"
+  }
+]

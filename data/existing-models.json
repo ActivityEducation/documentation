@@ -1,0 +1,69 @@
+[
+  {
+    "id": "ba2e9791-31dd-41e8-b804-8fd76b55b9d6",
+    "activityPubId": "http://localhost/api/objects/ddea2283-4f3b-48f9-a745-79d9f03477ab",
+    "name": "Test Model",
+    "summary": "This is a test",
+    "fields": [
+      {
+        "id": "field_1753767152771",
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "id": "field_1753767155974",
+        "name": "word",
+        "type": "text"
+      },
+      {
+        "id": "field_1753767159435",
+        "name": "category",
+        "type": "text"
+      }
+    ],
+    "cardTemplates": [
+      {
+        "id": "front",
+        "name": "Front",
+        "layout": [
+          {
+            "fieldId": "field_1753767152771",
+            "x": 8,
+            "y": 64,
+            "width": 616,
+            "height": 328
+          },
+          {
+            "fieldId": "field_1753767159435",
+            "x": 8,
+            "y": 8,
+            "width": 168,
+            "height": 44
+          }
+        ]
+      },
+      {
+        "id": "back",
+        "name": "Back",
+        "layout": [
+          {
+            "fieldId": "field_1753767155974",
+            "x": 8,
+            "y": 64,
+            "width": 616,
+            "height": 328
+          },
+          {
+            "fieldId": "field_1753767159435",
+            "x": 8,
+            "y": 8,
+            "width": 168,
+            "height": 44
+          }
+        ]
+      }
+    ],
+    "createdAt": "2025-08-01T19:48:40.467Z",
+    "updatedAt": "2025-08-01T19:48:40.467Z"
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "name": "die Katze",
+    "eduModel": "http://localhost/api/objects/ddea2283-4f3b-48f9-a745-79d9f03477ab",
+    "eduFieldsData": {
+      "word": "die Katze",
+      "image": "https://cdn.duden.de/_media_/full/K/Katze-201100278467.jpg",
+      "category": "Noun"
+    }
+  },
+  {
+    "name": "laufen",
+    "eduModel": "http://localhost/api/objects/ddea2283-4f3b-48f9-a745-79d9f03477ab",
+    "eduFieldsData": {
+      "word": "laufen",
+      "image": "https://cdn.duden.de/_media_/full/L/Laufen-201100279371.jpg",
+      "category": "Verb"
+    }
+  },
+  {
+    "name": "schnell",
+    "eduModel": "http://localhost/api/objects/ddea2283-4f3b-48f9-a745-79d9f03477ab",
+    "eduFieldsData": {
+      "word": "schnell",
+      "image": "https://cdn.duden.de/_media_/full/S/Schnell-201100279204.jpg",
+      "category": "Adjective"
+    }
+  },
+  {
+    "name": "das Auto",
+    "eduModel": "http://localhost/api/objects/ddea2283-4f3b-48f9-a745-79d9f03477ab",
+    "eduFieldsData": {
+      "word": "das Auto",
+      "image": "https://cdn.duden.de/_media_/full/A/Auto-201100278501.jpg",
+      "category": "Noun"
+    }
+  },
+  {
+    "name": "fliegen",
+    "eduModel": "http://localhost/api/objects/ddea2283-4f3b-48f9-a745-79d9f03477ab",
+    "eduFieldsData": {
+      "word": "fliegen",
+      "image": "https://cdn.duden.de/_media_/full/F/Fliegen-201100279372.jpg",
+      "category": "Verb"
+    }
+  },
+  {
+    "name": "groß",
+    "eduModel": "http://localhost/api/objects/ddea2283-4f3b-48f9-a745-79d9f03477ab",
+    "eduFieldsData": {
+      "word": "groß",
+      "image": "https://cdn.duden.de/_media_/full/G/Gross-201100279203.jpg",
+      "category": "Adjective"
+    }
+  },
+  {
+    "name": "der Apfel",
+    "eduModel": "http://localhost/api/objects/ddea2283-4f3b-48f9-a745-79d9f03477ab",
+    "eduFieldsData": {
+      "word": "der Apfel",
+      "image": "https://cdn.duden.de/_media_/full/A/Apfel-201100278455.jpg",
+      "category": "Noun"
+    }
+  },
+  {
+    "name": "denken",
+    "eduModel": "http://localhost/api/objects/ddea2283-4f3b-48f9-a745-79d9f03477ab",
+    "eduFieldsData": {
+      "word": "denken",
+      "image": "https://cdn.duden.de/_media_/full/D/Denken-201100279370.jpg",
+      "category": "Verb"
+    }
+  },
+  {
+    "name": "klein",
+    "eduModel": "http://localhost/api/objects/ddea2283-4f3b-48f9-a745-79d9f03477ab",
+    "eduFieldsData": {
+      "word": "klein",
+      "image": "https://cdn.duden.de/_media_/full/K/Klein-201100279202.jpg",
+      "category": "Adjective"
+    }
+  },
+  {
+    "name": "die Blume",
+    "eduModel": "http://localhost/api/objects/ddea2283-4f3b-48f9-a745-79d9f03477ab",
+    "eduFieldsData": {
+      "word": "die Blume",
+      "image": "https://cdn.duden.de/_media_/full/B/Blume-201100278478.jpg",
+      "category": "Noun"
+    }
+  }
+]

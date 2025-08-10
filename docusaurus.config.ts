@@ -151,10 +151,10 @@ const config: Config = {
         {
           title: "More",
           items: [
-            // {
-            //   label: 'Blog',
-            //   to: '/blog',
-            // },
+            {
+              label: 'Blog',
+              to: '/blog',
+            },
             {
               label: "System Status",
               to: "/status",
@@ -162,6 +162,10 @@ const config: Config = {
             {
               label: "Known Issues",
               to: "/issues",
+            },
+            {
+              label: 'Personal Library Manager',
+              to: '/library',
             },
             {
               href: "https://design.edupub.social",

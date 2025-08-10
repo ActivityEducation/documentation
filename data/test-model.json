@@ -1,0 +1,63 @@
+{
+  "name": "Test Model",
+  "summary": "This is a test",
+  "fields": [
+    {
+      "id": "field_1753767152771",
+      "name": "image",
+      "type": "image"
+    },
+    {
+      "id": "field_1753767155974",
+      "name": "word",
+      "type": "text"
+    },
+    {
+      "id": "field_1753767159435",
+      "name": "category",
+      "type": "text"
+    }
+  ],
+  "cardTemplates": [
+    {
+      "id": "front",
+      "name": "Front",
+      "layout": [
+        {
+          "fieldId": "field_1753767152771",
+          "x": 8,
+          "y": 64,
+          "width": 616,
+          "height": 328
+        },
+        {
+          "fieldId": "field_1753767159435",
+          "x": 8,
+          "y": 8,
+          "width": 168,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "id": "back",
+      "name": "Back",
+      "layout": [
+        {
+          "fieldId": "field_1753767155974",
+          "x": 8,
+          "y": 64,
+          "width": 616,
+          "height": 328
+        },
+        {
+          "fieldId": "field_1753767159435",
+          "x": 8,
+          "y": 8,
+          "width": 168,
+          "height": 44
+        }
+      ]
+    }
+  ]
+}

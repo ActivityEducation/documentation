@@ -1,0 +1,44 @@
+{
+  "name": "Basic Vocabulary",
+  "summary": "A simple model for learning new words, with a term on the front and a definition on the back.",
+  "fields": [
+    {
+      "id": "term",
+      "name": "Term",
+      "type": "text"
+    },
+    {
+      "id": "definition",
+      "name": "Definition",
+      "type": "text"
+    }
+  ],
+  "cardTemplates": [
+    {
+      "id": "front-template",
+      "name": "Front",
+      "layout": [
+        {
+          "fieldId": "term",
+          "x": 10,
+          "y": 40,
+          "width": 80,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "id": "back-template",
+      "name": "Back",
+      "layout": [
+        {
+          "fieldId": "definition",
+          "x": 10,
+          "y": 40,
+          "width": 80,
+          "height": 20
+        }
+      ]
+    }
+  ]
+}
