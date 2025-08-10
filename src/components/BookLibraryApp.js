@@ -1,626 +1,615 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
-// --- Custom Styles for Docusaurus Theming ---
-const DocusaurusStyles = () => (
-    <style>{`
-        .book-library-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
+/*
+  NOTE: This application is styled using a CSS-in-JS approach.
+  All styles are defined as JavaScript objects within the component file.
+*/
 
-        .library-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .library-toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background-color: var(--ifm-card-background-color);
-            border-radius: var(--ifm-card-border-radius);
-            margin-bottom: 2rem;
-            border: 1px solid var(--ifm-color-emphasis-200);
-        }
-
-        .toolbar-main-actions,
-        .toolbar-secondary-actions {
-             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-        }
-        
-        .library-toolbar input,
-        .library-toolbar select {
-            padding: 0.5rem 0.75rem;
-            border: 1px solid var(--ifm-color-emphasis-300);
-            border-radius: var(--ifm-border-radius);
-            background-color: var(--ifm-background-color);
-            color: var(--ifm-font-color-base);
-            height: 2.4rem;
-        }
-
-        .book-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .book-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .book-card-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.5rem;
-        }
-        
-        .book-form-grid {
-             display: grid;
-             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-             gap: 1.5rem;
-        }
-
-        .book-form-grid label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .book-form-grid input,
-        .book-form-grid textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--ifm-color-emphasis-300);
-            border-radius: var(--ifm-border-radius);
-            background-color: var(--ifm-background-color);
-            color: var(--ifm-font-color-base);
-            font-size: var(--ifm-font-size-base);
-        }
-
-        .book-form-grid input:focus,
-        .book-form-grid textarea:focus {
-            outline: none;
-            border-color: var(--ifm-color-primary);
-            box-shadow: 0 0 0 2px var(--ifm-color-primary-lightest);
-        }
-
-        .form-span-all {
-            grid-column: 1 / -1;
-        }
-
-        .book-form-card {
-            border-color: var(--ifm-color-primary);
-        }
-        
-        .book-form-card .card__header h2 {
-            color: var(--ifm-color-primary);
-        }
-
-        /* Typeahead Styles */
-        .typeahead-container {
-            position: relative;
-        }
-
-        .typeahead-suggestions {
-            position: absolute;
-            background-color: var(--ifm-card-background-color);
-            border: 1px solid var(--ifm-color-emphasis-300);
-            border-radius: var(--ifm-border-radius);
-            list-style-type: none;
-            margin: 0.25rem 0 0;
-            padding: 0;
-            width: 100%;
-            z-index: 10;
-            box-shadow: var(--ifm-global-shadow-lw);
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .typeahead-suggestions li {
-            padding: 0.75rem;
-            cursor: pointer;
-        }
-
-        .typeahead-suggestions li:hover {
-            background-color: var(--ifm-color-emphasis-100);
-        }
-
-        /* Pagination Styles */
-        .pagination-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .pagination-info {
-            font-size: 0.9rem;
-            color: var(--ifm-font-color-secondary);
-        }
-    `}</style>
+// --- Global Styles ---
+const GlobalStyles = () => (
+  <style>{`
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background-color: #f8fafc; 
+      margin: 0;
+    }
+    h1, h2, h3, h4, h5, h6 { 
+      font-family: 'Lora', serif; 
+    }
+    .star-rating span { 
+      transition: color 0.2s; 
+    }
+  `}</style>
+);
+const FontImports = () => (
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 );
 
 
-// --- Main App Component ---
-const App = () => {
-    return (
-        <>
-            <DocusaurusStyles />
-            <BookLibrary />
-        </>
-    );
+// --- SVG Icons ---
+const PlusIcon = () => <svg xmlns="http://www.w3.org/2000/svg" style={{height: '1rem', width: '1rem', marginRight: '0.5rem'}} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>;
+const ImportIcon = () => <svg xmlns="http://www.w3.org/2000/svg" style={{height: '1rem', width: '1rem', marginRight: '0.5rem'}} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>;
+const ExportIcon = () => <svg xmlns="http://www.w3.org/2000/svg" style={{height: '1rem', width: '1rem', marginRight: '0.5rem'}} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>;
+const SettingsIcon = () => <svg xmlns="http://www.w3.org/2000/svg" style={{height: '1rem', width: '1rem', marginRight: '0.5rem'}} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>;
+const FilterIcon = () => <svg xmlns="http://www.w3.org/2000/svg" style={{height: '1rem', width: '1rem', marginRight: '0.5rem'}} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L12 14.414V19a1 1 0 01-1.447.894L7 18a1 1 0 01-.553-.894v-3.586L3.293 6.707A1 1 0 013 6V4z" /></svg>;
+const MoreIcon = () => <svg xmlns="http://www.w3.org/2000/svg" style={{height: '1.25rem', width: '1.25rem'}} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" /></svg>;
+
+
+// --- Helper Functions ---
+const getInitialData = (key, defaultValue) => {
+  try {
+    const savedData = localStorage.getItem(key);
+    return savedData ? JSON.parse(savedData) : defaultValue;
+  } catch (error) {
+    console.error(`Failed to parse ${key} from localStorage`, error);
+    return defaultValue;
+  }
 };
 
+const saveData = (key, data) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(data));
+  } catch (error) {
+    console.error(`Failed to save ${key} to localStorage`, error);
+  }
+};
 
-// --- Book Library Component (The main app view) ---
-const BookLibrary = () => {
-    const [books, setBooks] = useState([]);
-    const [filteredBooks, setFilteredBooks] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [formMode, setFormMode] = useState(null); // 'add', 'edit', or null
-    const [currentBook, setCurrentBook] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [filterGenre, setFilterGenre] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const importFileRef = useRef(null);
-    const BOOKS_PER_PAGE = 6;
+const defaultSettings = {
+    resultsPerPage: 8,
+    statuses: [
+        { id: 's1', label: 'Available', color: '#22c55e', core: true },
+        { id: 's2', label: 'Checked Out', color: '#ef4444', core: true },
+        { id: 's3', label: 'Wishlist', color: '#3b82f6', core: false },
+    ]
+};
 
-    // --- LocalStorage Data Fetching ---
-    useEffect(() => {
-        try {
-            const storedBooks = localStorage.getItem('my-book-library');
-            if (storedBooks) {
-                setBooks(JSON.parse(storedBooks));
+const APP_VERSION = 2;
+
+// --- Main App Component ---
+export default function App() {
+  // --- State ---
+  const [settings, setSettings] = useState(() => getInitialData('my-media-settings', defaultSettings));
+  const [mediaItems, setMediaItems] = useState(() => getInitialData('my-media-library', []));
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [formState, setFormState] = useState({ visible: false, mode: 'add', item: null });
+  const [searchTerm, setSearchTerm] = useState('');
+  const [mediaTypeFilter, setMediaTypeFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [ratingFilter, setRatingFilter] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [expandedSummaries, setExpandedSummaries] = useState({});
+  const [checkoutModal, setCheckoutModal] = useState({ visible: false, itemId: null });
+  const [confirmationModal, setConfirmationModal] = useState({ visible: false, message: '', onConfirm: null });
+  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [openStatusMenu, setOpenStatusMenu] = useState(null);
+  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
+
+  // --- Effects ---
+  useEffect(() => { saveData('my-media-library', mediaItems); }, [mediaItems]);
+  useEffect(() => { saveData('my-media-settings', settings); }, [settings]);
+
+  useEffect(() => {
+    let currentItems = [...mediaItems];
+    if (searchTerm) {
+      currentItems = currentItems.filter(item =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (item.creator && item.creator.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
+    }
+    if (mediaTypeFilter !== 'all') currentItems = currentItems.filter(item => item.mediaType === mediaTypeFilter);
+    if (statusFilter !== 'all') currentItems = currentItems.filter(item => item.status === statusFilter);
+    if (selectedGenres.length > 0) {
+        currentItems = currentItems.filter(item => item.genre && selectedGenres.includes(item.genre));
+    }
+    if (ratingFilter > 0) {
+        currentItems = currentItems.filter(item => item.rating >= ratingFilter);
+    }
+    setFilteredItems(currentItems);
+    setCurrentPage(1);
+  }, [mediaItems, searchTerm, mediaTypeFilter, statusFilter, selectedGenres, ratingFilter]);
+  
+  useEffect(() => {
+    const closeMenus = () => {
+        setOpenStatusMenu(null);
+        setIsMoreMenuOpen(false);
+    };
+    window.addEventListener('click', closeMenus);
+    return () => window.removeEventListener('click', closeMenus);
+  }, []);
+
+  // --- Memoized Values ---
+  const allGenres = useMemo(() => [...new Set(mediaItems.map(i => i.genre).filter(Boolean).sort())], [mediaItems]);
+  const paginatedItems = useMemo(() => filteredItems.slice((currentPage - 1) * settings.resultsPerPage, currentPage * settings.resultsPerPage), [filteredItems, currentPage, settings.resultsPerPage]);
+  const totalPages = useMemo(() => Math.ceil(filteredItems.length / settings.resultsPerPage), [filteredItems, settings.resultsPerPage]);
+
+  // --- Handlers ---
+  const handleShowForm = (mode = 'add', item = null) => setFormState({ visible: true, mode, item });
+  const handleHideForm = () => setFormState({ visible: false, mode: 'add', item: null });
+  const handleSaveItem = (itemData) => {
+    if (formState.mode === 'add') {
+      const defaultStatus = settings.statuses[0]?.label || 'Available';
+      setMediaItems(prev => [...prev, { ...itemData, id: crypto.randomUUID(), status: itemData.status || defaultStatus, dateAdded: new Date().toISOString() }]);
+    } else {
+      setMediaItems(prev => prev.map(i => i.id === itemData.id ? { ...i, ...itemData } : i));
+    }
+    handleHideForm();
+  };
+  const handleDeleteItem = useCallback((itemId) => {
+    setConfirmationModal({ visible: true, message: 'Are you sure you want to permanently delete this item?', onConfirm: () => {
+      setMediaItems(prev => prev.filter(i => i.id !== itemId));
+      setConfirmationModal({ visible: false, message: '', onConfirm: null });
+    }});
+  }, []);
+  
+  const handleUpdateStatus = (itemId, newStatus) => {
+    if (newStatus === 'Checked Out') {
+        setCheckoutModal({ visible: true, itemId: itemId });
+        return;
+    }
+    setMediaItems(prevItems => prevItems.map(item => {
+        if (item.id === itemId) {
+            const updatedItem = { ...item, status: newStatus };
+            if (item.status === 'Checked Out') {
+                updatedItem.borrower = '';
+                updatedItem.checkoutDate = null;
+                updatedItem.dueDate = null;
             }
-        } catch (e) {
-            setError("Could not load books from local storage.");
-            console.error(e);
+            return updatedItem;
         }
-        setIsLoading(false);
-    }, []);
+        return item;
+    }));
+  };
 
-    // --- Persist data to LocalStorage on change ---
-    useEffect(() => {
-        if (!isLoading) {
-            try {
-                localStorage.setItem('my-book-library', JSON.stringify(books));
-            } catch (e) {
-                setError("Could not save books to local storage.");
-                console.error(e);
-            }
+  const handleCheckout = (borrower) => {
+    if (!borrower.trim() || !checkoutModal.itemId) return;
+    const checkoutDate = new Date();
+    const dueDate = new Date();
+    dueDate.setDate(checkoutDate.getDate() + 14);
+    setMediaItems(prev => prev.map(i => i.id === checkoutModal.itemId ? { ...i, status: 'Checked Out', borrower: borrower.trim(), checkoutDate: checkoutDate.toISOString(), dueDate: dueDate.toISOString() } : i));
+    setCheckoutModal({ visible: false, itemId: null });
+  };
+  
+  const handleImport = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const importedData = JSON.parse(e.target.result);
+        
+        // Version 2+ import
+        if (importedData.version && importedData.version >= 2) {
+            setConfirmationModal({ visible: true, message: 'This will overwrite your current library and settings. Continue?', onConfirm: () => {
+                setMediaItems(importedData.mediaItems || []);
+                setSettings(importedData.settings || defaultSettings);
+                setConfirmationModal({ visible: false, message: '', onConfirm: null });
+            }});
+        } 
+        // Legacy (Version 1) import
+        else if (Array.isArray(importedData)) {
+            setConfirmationModal({ visible: true, message: 'Legacy library file detected. This will overwrite your current library items but preserve your settings. Continue?', onConfirm: () => {
+                const sanitizedData = importedData.map(item => ({ 
+                    mediaType: 'Book', 
+                    status: 'Available', 
+                    borrower: '', 
+                    checkoutDate: null, 
+                    dueDate: null, 
+                    dateAdded: new Date().toISOString(), 
+                    rating: 0, 
+                    ...item 
+                }));
+                setMediaItems(sanitizedData);
+                setConfirmationModal({ visible: false, message: '', onConfirm: null });
+            }});
+        } else {
+            alert('Invalid or unrecognized file format.');
         }
-    }, [books, isLoading]);
 
-
-    // --- Search and Filter Logic ---
-    useEffect(() => {
-        let tempBooks = books.filter(book => 
-            (book.title?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
-            (book.author?.toLowerCase() || '').includes(searchTerm.toLowerCase())
-        );
-        if (filterGenre) {
-            tempBooks = tempBooks.filter(book => book.genre === filterGenre);
-        }
-        setFilteredBooks(tempBooks);
-        setCurrentPage(1); // Reset to first page on new filter/search
-    }, [searchTerm, filterGenre, books]);
-
-    // --- Form Handlers ---
-    const handleShowAddForm = () => {
-        setCurrentBook(null);
-        setFormMode('add');
+      } catch (error) { 
+        alert('Error reading or parsing the file.'); 
+        console.error("Import error:", error);
+      }
     };
+    reader.readAsText(file);
+    event.target.value = null; // Reset file input
+  };
 
-    const handleShowEditForm = (book) => {
-        setCurrentBook(book);
-        setFormMode('edit');
+  const handleExport = () => {
+    const exportData = {
+        version: APP_VERSION,
+        settings: settings,
+        mediaItems: mediaItems
     };
+    const dataStr = JSON.stringify(exportData, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', 'my-media-library.json');
+    linkElement.click();
+  };
+  const toggleSummary = (itemId) => setExpandedSummaries(prev => ({...prev, [itemId]: !prev[itemId]}));
 
-    const handleCancelForm = () => {
-        setFormMode(null);
-        setCurrentBook(null);
-    };
-
-    const handleSubmitForm = (formData) => {
-        try {
-            if (formMode === 'add') {
-                const newBook = { ...formData, id: crypto.randomUUID() };
-                setBooks([...books, newBook]);
-            } else if (formMode === 'edit' && currentBook) {
-                setBooks(books.map(b => b.id === currentBook.id ? { ...formData, id: currentBook.id } : b));
-            }
-            handleCancelForm();
-        } catch (e) {
-            console.error("Error submitting form: ", e);
-            setError("Failed to save the book.");
-        }
-    };
-
-    const handleDeleteBook = (id) => {
-        if (window.confirm("Are you sure you want to delete this book?")) {
-            try {
-                setBooks(books.filter(b => b.id !== id));
-            } catch (e) {
-                console.error("Error deleting book: ", e);
-                setError("Failed to delete the book.");
-            }
-        }
-    };
-    
-    // --- Import/Export Handlers ---
-    const handleExport = () => {
-        const dataStr = JSON.stringify(books, null, 2);
-        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-        const exportFileDefaultName = 'my-book-library.json';
-        const linkElement = document.createElement('a');
-        linkElement.setAttribute('href', dataUri);
-        linkElement.setAttribute('download', exportFileDefaultName);
-        linkElement.click();
-    };
-
-    const handleImport = (event) => {
-        const file = event.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            try {
-                const importedBooks = JSON.parse(e.target.result);
-                if (!Array.isArray(importedBooks)) {
-                    throw new Error("Imported file is not a valid book array.");
-                }
-                if (window.confirm("Are you sure you want to overwrite your current library with the imported data?")) {
-                    setBooks(importedBooks);
-                }
-            } catch (err) {
-                setError("Failed to import file. Please make sure it's a valid JSON file exported from this app.");
-                console.error(err);
-            }
-        };
-        reader.readAsText(file);
-        event.target.value = null; 
-    };
-
-    // --- Memoized lists for typeahead ---
-    const uniqueAuthors = useMemo(() => [...new Set(books.map(b => b.author).filter(Boolean))], [books]);
-    const uniqueGenres = useMemo(() => [...new Set(books.map(b => b.genre).filter(Boolean))], [books]);
-    const uniqueLocations = useMemo(() => [...new Set(books.map(b => b.location).filter(Boolean))], [books]);
-    const uniqueTags = useMemo(() => [...new Set(books.flatMap(b => (b.tags || '').split(',')).map(t => t.trim()).filter(Boolean))], [books]);
-
-    // --- Pagination Logic ---
-    const totalPages = Math.ceil(filteredBooks.length / BOOKS_PER_PAGE);
-    const startIndex = (currentPage - 1) * BOOKS_PER_PAGE;
-    const endIndex = startIndex + BOOKS_PER_PAGE;
-    const currentBooks = filteredBooks.slice(startIndex, endIndex);
-
-    return (
-        <div className="book-library-container">
-            <header className="library-header">
-                 <h1>Personal Library Manager</h1>
-                 <p className="p--small">Data stored locally in your browser</p>
-            </header>
-
-            {error && <div className="alert alert--danger margin-bottom--lg" role="alert">{error}</div>}
-
-            <div className="library-toolbar">
-                <div className="toolbar-main-actions">
-                    <button onClick={handleShowAddForm} className="button button--primary" disabled={formMode === 'add'}>Add New Book</button>
-                    <button onClick={() => importFileRef.current.click()} className="button button--secondary">Import</button>
-                    <button onClick={handleExport} className="button button--secondary">Export</button>
-                    <input type="file" ref={importFileRef} style={{display: 'none'}} accept=".json" onChange={handleImport} />
-                </div>
-                <div className="toolbar-secondary-actions">
-                    <input type="text" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-                    <select value={filterGenre} onChange={(e) => setFilterGenre(e.target.value)}>
-                        <option value="">All Genres</option>
-                        {uniqueGenres.map(genre => <option key={genre} value={genre}>{genre}</option>)}
-                    </select>
+  // --- Sub-components ---
+  const FilterCard = ({ settings }) => (
+    <>
+        {isFiltersVisible && (
+            <div style={styles.filterCard}>
+                <h3 style={styles.formTitleFilter}>Catalog Filters</h3>
+                <div style={styles.filterGrid}>
+                    <div>
+                        <label htmlFor="search" style={styles.label}>Search</label>
+                        <input type="text" id="search" placeholder="Title or creator..." style={styles.input} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                    </div>
+                    <div>
+                        <label style={styles.label}>Rating</label>
+                        <div style={styles.starRatingContainer}>
+                            {[1, 2, 3, 4, 5].map(star => (
+                                <span key={star} onClick={() => setRatingFilter(prev => prev === star ? 0 : star)} style={{...styles.star, color: star <= ratingFilter ? '#f59e0b' : '#d1d5db'}} className="hover:text-amber-300">★</span>
+                            ))}
+                            {ratingFilter > 0 && (<button onClick={() => setRatingFilter(0)} style={styles.clearButton}>clear</button>)}
+                        </div>
+                    </div>
+                    <div>
+                        <label htmlFor="mediaType" style={styles.label}>Media Type</label>
+                        <select id="mediaType" value={mediaTypeFilter} onChange={(e) => setMediaTypeFilter(e.target.value)} style={styles.input}>
+                            <option value="all">All Media Types</option>
+                            <option value="Book">Book</option><option value="Movie">Movie</option><option value="Music">Music</option><option value="Game">Game</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="status" style={styles.label}>Status</label>
+                        <select id="status" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} style={styles.input}>
+                            <option value="all">All Statuses</option>
+                            {settings.statuses.map(status => <option key={status.id} value={status.label}>{status.label}</option>)}
+                        </select>
+                    </div>
+                    <div style={{gridColumn: 'span 2 / span 2'}}>
+                        <label style={styles.label}>Genre</label>
+                        <div style={styles.genreList}>
+                            {allGenres.map(genre => (
+                                <div key={genre} style={styles.checkboxContainer}>
+                                    <input id={`genre-${genre}`} type="checkbox" checked={selectedGenres.includes(genre)} onChange={() => setSelectedGenres(prev => prev.includes(genre) ? prev.filter(g => g !== genre) : [...prev, genre])} style={styles.checkbox} />
+                                    <label htmlFor={`genre-${genre}`} style={styles.checkboxLabel}>{genre}</label>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            {formMode && (
-                <BookForm 
-                    mode={formMode} 
-                    initialData={currentBook} 
-                    onSubmit={handleSubmitForm} 
-                    onCancel={handleCancelForm}
-                    suggestions={{ uniqueAuthors, uniqueGenres, uniqueLocations, uniqueTags }}
-                />
-            )}
+        )}
+    </>
+  );
 
-            {isLoading ? (
-                <div style={{textAlign: 'center', padding: '2rem'}}><p>Loading your books...</p></div>
-            ) : (
-                <>
-                    {filteredBooks.length > 0 ? (
-                        <div className="book-grid">
-                            {currentBooks.map(book => <BookCard key={book.id} book={book} onEdit={handleShowEditForm} onDelete={handleDeleteBook} />)}
-                        </div>
-                    ) : (
-                        <div className="card">
-                            <div className="card__body" style={{ textAlign: 'center' }}>
-                                <p>No books found.</p>
+  const MediaForm = ({ item, onSave, onCancel, settings }) => {
+    const [formData, setFormData] = useState({ mediaType: 'Book', title: '', creator: '', genre: '', year: '', summary: '', location: '', tags: '', rating: 0, platform: '', status: settings.statuses[0]?.label || '', ...item });
+    const handleChange = (e) => setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (!formData.title || !formData.creator) { alert('Please fill in Title and Creator fields.'); return; }
+      onSave(formData);
+    };
+    const creatorLabel = { Book: 'Author', Movie: 'Director', Music: 'Artist', Game: 'Developer' }[formData.mediaType] || 'Creator';
+    return (
+      <div style={styles.formContainer}>
+        <h3 style={styles.formTitle}>{item ? 'Edit Item' : 'Add New Item'}</h3>
+        <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
+          <div style={styles.formGrid}>
+            <div>
+              <label style={styles.label}>Media Type <span style={{color: '#ef4444'}}>*</span></label>
+              <select name="mediaType" value={formData.mediaType} onChange={handleChange} style={styles.input}>
+                <option>Book</option><option>Movie</option><option>Music</option><option>Game</option>
+              </select>
+            </div>
+            <div style={{gridColumn: 'span 2 / span 2'}}>
+              <label style={styles.label}>Title <span style={{color: '#ef4444'}}>*</span></label>
+              <input type="text" name="title" value={formData.title} onChange={handleChange} required style={styles.input}/>
+            </div>
+            <div>
+              <label style={styles.label}>{creatorLabel} <span style={{color: '#ef4444'}}>*</span></label>
+              <input type="text" name="creator" value={formData.creator} onChange={handleChange} required style={styles.input}/>
+            </div>
+            <div>
+              <label style={styles.label}>Genre</label>
+              <input type="text" name="genre" value={formData.genre} onChange={handleChange} style={styles.input}/>
+            </div>
+            <div>
+              <label style={styles.label}>Year</label>
+              <input type="number" name="year" value={formData.year} onChange={handleChange} style={styles.input}/>
+            </div>
+            {formData.mediaType === 'Game' && (
+              <div>
+                <label style={styles.label}>Platform</label>
+                <input type="text" name="platform" value={formData.platform} onChange={handleChange} style={styles.input}/>
+              </div>
+            )}
+             <div>
+              <label style={styles.label}>Status</label>
+              <select name="status" value={formData.status} onChange={handleChange} style={styles.input}>
+                {settings.statuses.map(s => <option key={s.id} value={s.label}>{s.label}</option>)}
+              </select>
+            </div>
+             <div>
+                <label style={styles.label}>Your Rating</label>
+                <div style={{...styles.starRatingContainer, marginTop: '0.5rem'}}>
+                    {[1, 2, 3, 4, 5].map(star => <span key={star} onClick={() => setFormData(f => ({...f, rating: star}))} style={{...styles.star, fontSize: '2rem', color: star <= formData.rating ? '#f59e0b' : '#d1d5db'}} className="hover:text-amber-300">★</span>)}
+                </div>
+            </div>
+          </div>
+          <div>
+              <label style={styles.label}>Summary</label>
+              <textarea name="summary" value={formData.summary} onChange={handleChange} rows="4" style={{...styles.input, height: 'auto'}}></textarea>
+          </div>
+          <div style={styles.formActions}>
+            <button type="button" style={styles.buttonSecondary} onClick={onCancel}>Cancel</button>
+            <button type="submit" style={styles.buttonPrimary}>Save Item</button>
+          </div>
+        </form>
+      </div>
+    );
+  };
+
+  const MediaCard = ({ item, settings, onUpdateStatus, openStatusMenu, setOpenStatusMenu }) => {
+    const isExpanded = !!expandedSummaries[item.id];
+    const isOverdue = item.status === 'Checked Out' && item.dueDate && new Date(item.dueDate) < new Date();
+    const isStatusMenuOpen = openStatusMenu === item.id;
+    
+    const statusInfo = settings.statuses.find(s => s.label === item.status) || { label: item.status, color: '#64748b' };
+    const creatorLabel = { Book: 'by', Movie: 'dir.', Music: 'by', Game: 'dev.' }[item.mediaType] || 'by';
+
+    return (
+        <div style={styles.card}>
+            <div style={styles.cardContent}>
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.25rem'}}>
+                    <h3 style={styles.cardTitle}>{item.title}</h3>
+                    <span style={{...styles.badge, backgroundColor: statusInfo.color }}>{statusInfo.label}</span>
+                </div>
+                <p style={styles.cardSubtitle}>{creatorLabel} {item.creator} ({item.year})</p>
+                <div style={styles.starRatingContainer}>
+                    {[1, 2, 3, 4, 5].map(star => <span key={star} style={{...styles.star, fontSize: '1.25rem', color: star <= item.rating ? '#f59e0b' : '#d1d5db'}}>★</span>)}
+                </div>
+                <p style={styles.cardSummary}>
+                    {isExpanded || !item.summary || item.summary.length <= 150 ? item.summary : `${item.summary.substring(0, 150)}...`}
+                    {item.summary && item.summary.length > 150 && (<button onClick={() => toggleSummary(item.id)} style={styles.showMoreButton}> {isExpanded ? 'Show less' : 'Show more'}</button>)}
+                </p>
+                {item.status === 'Checked Out' && (<div style={{...styles.infoBox, borderLeftColor: isOverdue ? '#fecaca' : '#bfdbfe', backgroundColor: isOverdue ? '#fef2f2' : '#eff6ff'}}><p style={{color: isOverdue ? '#991b1b' : '#1e40af'}}><strong>Checked out by:</strong> {item.borrower}</p><p style={{color: isOverdue ? '#991b1b' : '#1e40af'}}><strong>Due Date:</strong> <span style={{fontWeight: isOverdue ? 'bold' : 'normal'}}>{new Date(item.dueDate).toLocaleDateString()}</span></p></div>)}
+            </div>
+            <div style={styles.cardActions}>
+                <div style={{position: 'relative', display: 'inline-block', textAlign: 'left'}}>
+                    <button 
+                        onClick={(e) => { e.stopPropagation(); setOpenStatusMenu(isStatusMenuOpen ? null : item.id); }}
+                        style={styles.buttonSmall}
+                    >
+                        Update Status
+                    </button>
+                    {isStatusMenuOpen && (
+                        <div style={{...styles.dropdownMenu, bottom: '100%', top: 'auto'}}>
+                            <div style={{padding: '0.25rem 0'}}>
+                                {settings.statuses.map(s => (
+                                    <a
+                                        key={s.id}
+                                        href="#"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            onUpdateStatus(item.id, s.label);
+                                            setOpenStatusMenu(null);
+                                        }}
+                                        style={styles.dropdownItem}
+                                    >
+                                        {s.label}
+                                    </a>
+                                ))}
                             </div>
                         </div>
                     )}
-                    {totalPages > 1 && (
-                        <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={(page) => setCurrentPage(page)}
-                        />
-                    )}
-                </>
-            )}
-        </div>
-    );
-};
-
-// --- Pagination Component ---
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-    const handlePrevious = () => {
-        if (currentPage > 1) {
-            onPageChange(currentPage - 1);
-        }
-    };
-
-    const handleNext = () => {
-        if (currentPage < totalPages) {
-            onPageChange(currentPage + 1);
-        }
-    };
-
-    return (
-        <div className="pagination-container">
-            <button
-                onClick={handlePrevious}
-                disabled={currentPage === 1}
-                className="button button--secondary"
-            >
-                Previous
-            </button>
-            <span className="pagination-info">
-                Page {currentPage} of {totalPages}
-            </span>
-            <button
-                onClick={handleNext}
-                disabled={currentPage === totalPages}
-                className="button button--secondary"
-            >
-                Next
-            </button>
-        </div>
-    );
-};
-
-// --- Typeahead Input Component ---
-const TypeaheadInput = ({ value, name, placeholder, required, suggestions, onChange, isTags = false }) => {
-    const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-    const [showSuggestions, setShowSuggestions] = useState(false);
-
-    const handleChange = (e) => {
-        const userInput = e.target.value;
-        let currentQuery = userInput;
-
-        if (isTags) {
-            const parts = userInput.split(',');
-            currentQuery = parts[parts.length - 1].trim();
-        }
-
-        if (currentQuery) {
-            const filtered = suggestions.filter(
-                (suggestion) => suggestion.toLowerCase().indexOf(currentQuery.toLowerCase()) > -1
-            );
-            setFilteredSuggestions(filtered);
-        } else {
-            setFilteredSuggestions([]);
-        }
-        
-        setShowSuggestions(true);
-        onChange(e); 
-    };
-
-    const handleClick = (suggestion) => {
-        let newValue = suggestion;
-        if (isTags) {
-            const parts = value.split(',');
-            parts[parts.length - 1] = suggestion;
-            newValue = parts.join(', ');
-        }
-        
-        onChange({ target: { name, value: newValue } });
-        setFilteredSuggestions([]);
-        setShowSuggestions(false);
-    };
-
-    return (
-        <div className="typeahead-container">
-            <input
-                type="text"
-                name={name}
-                value={value}
-                onChange={handleChange}
-                onFocus={() => setShowSuggestions(true)}
-                onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                placeholder={placeholder}
-                required={required}
-                autoComplete="off"
-            />
-            {showSuggestions && filteredSuggestions.length > 0 && (
-                <ul className="typeahead-suggestions">
-                    {filteredSuggestions.map((suggestion) => (
-                        <li key={suggestion} onMouseDown={() => handleClick(suggestion)}>
-                            {suggestion}
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
-    );
-};
-
-// --- Inline Book Form Component ---
-const BookForm = ({ mode, initialData, onSubmit, onCancel, suggestions }) => {
-    const [formData, setFormData] = useState({
-        title: '', author: '', genre: '', year: '', summary: '',
-        location: '', isbn10: '', isbn13: '', tags: ''
-    });
-
-    useEffect(() => {
-        setFormData({
-            title: initialData?.title || '',
-            author: initialData?.author || '',
-            genre: initialData?.genre || '',
-            year: initialData?.year || '',
-            summary: initialData?.summary || '',
-            location: initialData?.location || '',
-            isbn10: initialData?.isbn10 || '',
-            isbn13: initialData?.isbn13 || '',
-            tags: initialData?.tags || '',
-        });
-    }, [initialData, mode]);
-
-    const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-    const handleSubmit = (e) => { e.preventDefault(); onSubmit(formData); };
-
-    return (
-        <div className="card book-form-card margin-bottom--lg">
-            <div className="card__header">
-                <h2>{mode === 'add' ? 'Add a New Book' : `Editing: ${initialData.title}`}</h2>
-            </div>
-            <div className="card__body">
-                <form onSubmit={handleSubmit}>
-                    <div className="book-form-grid">
-                        {/* Main Details */}
-                        <div>
-                            <label>Title*</label>
-                            <input type="text" name="title" value={formData.title} onChange={handleChange} required />
-                        </div>
-                        <div>
-                            <label>Author*</label>
-                            <TypeaheadInput name="author" value={formData.author} onChange={handleChange} suggestions={suggestions.uniqueAuthors} required />
-                        </div>
-                        <div>
-                            <label>Genre*</label>
-                            <TypeaheadInput name="genre" value={formData.genre} onChange={handleChange} suggestions={suggestions.uniqueGenres} required />
-                        </div>
-                        <div>
-                            <label>Year Published*</label>
-                            <input type="number" name="year" value={formData.year} onChange={handleChange} required />
-                        </div>
-
-                        {/* Location & Tags */}
-                        <div>
-                            <label>Location</label>
-                            <TypeaheadInput name="location" value={formData.location} onChange={handleChange} suggestions={suggestions.uniqueLocations} placeholder="e.g., Living Room Shelf" />
-                        </div>
-                        <div>
-                            <label>Tags</label>
-                            <TypeaheadInput name="tags" value={formData.tags} onChange={handleChange} suggestions={suggestions.uniqueTags} placeholder="e.g., Signed, Favorite" isTags={true} />
-                        </div>
-
-                        {/* ISBN Group */}
-                        <div>
-                            <label>ISBN-13</label>
-                            <input type="text" name="isbn13" value={formData.isbn13} onChange={handleChange} />
-                        </div>
-                        <div>
-                            <label>ISBN-10</label>
-                            <input type="text" name="isbn10" value={formData.isbn10} onChange={handleChange} />
-                        </div>
-                        
-                        {/* Summary */}
-                        <div className="form-span-all">
-                            <label>Summary*</label>
-                            <textarea name="summary" value={formData.summary} onChange={handleChange} rows="4" required />
-                        </div>
-                    </div>
-                    <div className="card__footer">
-                         <div className="book-card-footer">
-                            <button type="button" onClick={onCancel} className="button button--secondary">Cancel</button>
-                            <button type="submit" className="button button--primary">Save Book</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    );
-};
-
-
-// --- Book Card Component ---
-const BookCard = ({ book, onEdit, onDelete }) => {
-    const [isExpanded, setIsExpanded] = useState(false);
-    const SUMMARY_MAX_LENGTH = 200;
-
-    const toggleExpanded = () => {
-        setIsExpanded(!isExpanded);
-    };
-
-    const summaryIsLong = book.summary.length > SUMMARY_MAX_LENGTH;
-    const displayedSummary = summaryIsLong && !isExpanded 
-        ? `${book.summary.substring(0, SUMMARY_MAX_LENGTH)}...` 
-        : book.summary;
-
-    return (
-        <div className="card">
-            <div className="card__body">
-                <h3>{book.title}</h3>
-                <p>by <strong>{book.author}</strong></p>
-                <div style={{marginBottom: '1rem'}}>
-                    <span className="badge badge--primary margin-right--xs">{book.genre}</span>
-                    <span className="badge badge--secondary">Published: {book.year}</span>
                 </div>
-                <p className="p--small" style={{whiteSpace: 'pre-wrap'}}>
-                    {displayedSummary}
-                </p>
-                {summaryIsLong && (
-                    <button onClick={toggleExpanded} className="button button--link button--sm" style={{paddingLeft: 0, marginTop: '0.5rem'}}>
-                        {isExpanded ? 'Show less' : 'Show more'}
-                    </button>
-                )}
-                
-                {book.tags && (
-                     <div style={{paddingTop: '1rem', marginTop: '1rem', borderTop: '1px solid var(--ifm-color-emphasis-200)', display: 'flex', flexWrap: 'wrap', gap: '0.5rem'}}>
-                        {book.tags.split(',').map(tag => tag.trim()).filter(Boolean).map(tag => (
-                            <span key={tag} className="badge badge--success">{tag}</span>
+                <button style={styles.buttonSmall} onClick={() => handleShowForm('edit', item)}>Edit</button>
+                <button style={{...styles.buttonSmall, backgroundColor: '#fee2e2', color: '#b91c1c'}} onClick={() => handleDeleteItem(item.id)}>Delete</button>
+            </div>
+        </div>
+    );
+  };
+  
+  const Modal = ({ visible, onClose, title, children, size = 'max-w-md' }) => {
+    if (!visible) return null;
+    const sizeMap = {
+        'max-w-md': '28rem',
+        'max-w-2xl': '42rem'
+    }
+    return (<div style={styles.modalOverlay} onClick={onClose}><div style={{...styles.modalContent, maxWidth: sizeMap[size]}} onClick={e => e.stopPropagation()}><div style={styles.modalHeader}><h2 style={styles.modalTitle}>{title}</h2><button onClick={onClose} style={styles.closeButton}>&times;</button></div><div style={{padding: '1.25rem'}}>{children}</div></div></div>);
+  };
+
+  const SettingsModal = ({ settings, onSave, onClose }) => {
+    const [localSettings, setLocalSettings] = useState(JSON.parse(JSON.stringify(settings))); // Deep copy
+
+    const handleStatusChange = (id, field, value) => {
+        setLocalSettings(prev => ({
+            ...prev,
+            statuses: prev.statuses.map(s => s.id === id ? { ...s, [field]: value } : s)
+        }));
+    };
+
+    const handleAddStatus = () => {
+        setLocalSettings(prev => ({
+            ...prev,
+            statuses: [...prev.statuses, { id: crypto.randomUUID(), label: 'New Status', color: '#cccccc', core: false }]
+        }));
+    };
+
+    const handleRemoveStatus = (id) => {
+        setLocalSettings(prev => ({
+            ...prev,
+            statuses: prev.statuses.filter(s => s.id !== id)
+        }));
+    };
+
+    return (
+        <Modal visible={true} onClose={onClose} title="Settings" size="max-w-2xl">
+            <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
+                <div>
+                    <h3 style={styles.settingsSectionTitle}>Results Per Page</h3>
+                    <input 
+                        type="number" 
+                        value={localSettings.resultsPerPage}
+                        onChange={e => setLocalSettings(p => ({...p, resultsPerPage: parseInt(e.target.value, 10) || 1 }))}
+                        style={styles.input}
+                    />
+                </div>
+                <div>
+                    <h3 style={styles.settingsSectionTitle}>Status Labels</h3>
+                    <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
+                        {localSettings.statuses.map(status => (
+                            <div key={status.id} style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                                <input 
+                                    type="color" 
+                                    value={status.color}
+                                    onChange={e => handleStatusChange(status.id, 'color', e.target.value)}
+                                    style={styles.colorInput}
+                                />
+                                <input 
+                                    type="text" 
+                                    value={status.label}
+                                    onChange={e => handleStatusChange(status.id, 'label', e.target.value)}
+                                    disabled={status.core}
+                                    style={{...styles.input, flexGrow: 1, backgroundColor: status.core ? '#f3f4f6': 'white', cursor: status.core ? 'not-allowed' : 'text'}}
+                                />
+                                <button 
+                                    onClick={() => handleRemoveStatus(status.id)} 
+                                    disabled={status.core}
+                                    style={{...styles.iconButton, color: status.core ? '#9ca3af' : '#ef4444', cursor: status.core ? 'not-allowed' : 'pointer'}}
+                                    title={status.core ? "This is a core status and cannot be removed." : "Remove status"}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" style={{height: '1.25rem', width: '1.25rem'}} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                </button>
+                            </div>
                         ))}
                     </div>
-                )}
+                    <button onClick={handleAddStatus} style={{...styles.buttonSmall, marginTop: '0.5rem'}}>Add Status</button>
+                </div>
+            </div>
+            <div style={styles.modalActions}>
+                <button style={styles.buttonSecondary} onClick={onClose}>Cancel</button>
+                <button style={styles.buttonPrimary} onClick={() => onSave(localSettings)}>Save Settings</button>
+            </div>
+        </Modal>
+    );
+  };
 
-                {(book.location || book.isbn10 || book.isbn13) && (
-                    <div style={{paddingTop: '1rem', marginTop: '1rem', borderTop: '1px solid var(--ifm-color-emphasis-200)', fontSize: '0.8rem'}}>
-                        {book.location && (
-                            <p><strong>Location:</strong> {book.location}</p>
-                        )}
-                        {book.isbn13 && (
-                            <p><strong>ISBN-13:</strong> {book.isbn13}</p>
-                        )}
-                        {book.isbn10 && (
-                            <p><strong>ISBN-10:</strong> {book.isbn10}</p>
-                        )}
+  const CheckoutModal = ({ settings, ...props }) => {
+    const [borrower, setBorrower] = useState('');
+    return (<Modal visible={props.visible} onClose={props.onClose} title="Check Out Item"><p style={{color: '#475569', marginBottom: '1rem'}}>Enter the borrower's name.</p><input type="text" value={borrower} onChange={e => setBorrower(e.target.value)} placeholder="Borrower's Name" autoFocus style={styles.input}/><div style={styles.modalActions}><button style={styles.buttonSecondary} onClick={props.onClose}>Cancel</button><button style={{...styles.buttonPrimary, opacity: !borrower.trim() ? 0.5 : 1}} onClick={() => handleCheckout(borrower)} disabled={!borrower.trim()}>Confirm</button></div></Modal>);
+  };
+
+  const ConfirmationModal = (props) => (<Modal visible={props.visible} onClose={props.onClose} title="Are you sure?"><p style={{color: '#475569'}}>{props.message}</p><div style={styles.modalActions}><button style={styles.buttonSecondary} onClick={props.onClose}>Cancel</button><button style={{...styles.buttonPrimary, backgroundColor: '#dc2626'}} onClick={props.onConfirm}>Confirm</button></div></Modal>);
+
+  return (
+    <>
+      <GlobalStyles />
+      <FontImports />
+      <div style={styles.appContainer}>
+        <header style={styles.header}>
+          <h1 style={styles.mainTitle}>Library Manager</h1>
+          <div style={styles.headerActions}>
+            <button style={styles.buttonHeader} onClick={() => setIsFiltersVisible(!isFiltersVisible)}><FilterIcon/>Filters</button>
+            <div style={{position: 'relative'}}>
+                <button style={styles.buttonHeader} onClick={(e) => { e.stopPropagation(); setIsMoreMenuOpen(!isMoreMenuOpen); }}><MoreIcon/></button>
+                {isMoreMenuOpen && (
+                    <div style={styles.headerDropdownMenu} onClick={(e) => e.stopPropagation()}>
+                         <a href="#" onClick={(e) => { e.preventDefault(); document.getElementById('import-file').click(); setIsMoreMenuOpen(false); }} style={{...styles.dropdownItem, display: 'flex', alignItems: 'center'}}><ImportIcon/>Import</a>
+                         <a href="#" onClick={(e) => { e.preventDefault(); handleExport(); setIsMoreMenuOpen(false); }} style={{...styles.dropdownItem, display: 'flex', alignItems: 'center'}}><ExportIcon/>Export</a>
+                         <a href="#" onClick={(e) => { e.preventDefault(); setIsSettingsModalOpen(true); setIsMoreMenuOpen(false); }} style={{...styles.dropdownItem, display: 'flex', alignItems: 'center'}}><SettingsIcon/>Settings</a>
                     </div>
                 )}
             </div>
-            <div className="card__footer">
-                <div className="book-card-footer">
-                    <button onClick={() => onEdit(book)} className="button button--link button--sm">Edit</button>
-                    <button onClick={() => onDelete(book.id)} className="button button--link button--sm text--danger">Delete</button>
-                </div>
-            </div>
-        </div>
-    );
-};
+            <button style={{...styles.buttonHeader, ...styles.buttonHeaderPrimary}} onClick={() => handleShowForm('add')}><PlusIcon/>Add Item</button>
+            <input type="file" id="import-file" style={{display: 'none'}} onChange={handleImport} accept=".json" />
+          </div>
+        </header>
 
-export default App;
+        <main>
+            <FilterCard settings={settings} />
+            {formState.visible && <MediaForm item={formState.item} onSave={handleSaveItem} onCancel={handleHideForm} settings={settings} />}
+            {paginatedItems.length > 0 ? (
+                <div style={styles.grid}>
+                    {paginatedItems.map(item => <MediaCard key={item.id} item={item} settings={settings} onUpdateStatus={handleUpdateStatus} openStatusMenu={openStatusMenu} setOpenStatusMenu={setOpenStatusMenu} />)}
+                </div>
+            ) : (
+                <div style={styles.emptyState}>
+                    <h3 style={styles.emptyStateTitle}>No items found</h3>
+                    <p style={styles.emptyStateText}>Try adjusting your filters or add a new item.</p>
+                </div>
+            )}
+
+            {totalPages > 1 && (
+                <div style={styles.pagination}>
+                    <button style={styles.buttonHeader} onClick={() => setCurrentPage(p => p - 1)} disabled={currentPage === 1}>Previous</button>
+                    <span style={styles.paginationText}>Page {currentPage} of {totalPages}</span>
+                    <button style={styles.buttonHeader} onClick={() => setCurrentPage(p => p + 1)} disabled={currentPage === totalPages}>Next</button>
+                </div>
+            )}
+        </main>
+        {isSettingsModalOpen && <SettingsModal settings={settings} onClose={() => setIsSettingsModalOpen(false)} onSave={(newSettings) => { setSettings(newSettings); setIsSettingsModalOpen(false); }} />}
+        <CheckoutModal visible={checkoutModal.visible} onClose={() => setCheckoutModal({ visible: false, itemId: null })} />
+        <ConfirmationModal visible={confirmationModal.visible} message={confirmationModal.message} onConfirm={confirmationModal.onConfirm} onClose={() => setConfirmationModal({ visible: false, message: '', onConfirm: null })} />
+      </div>
+    </>
+  );
+}
+
+// --- Styles ---
+const styles = {
+    appContainer: { maxWidth: '1280px', margin: '0 auto', padding: '2rem' },
+    header: { display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1.5rem', marginBottom: '2rem', borderBottom: '1px solid #e5e7eb' },
+    mainTitle: { fontSize: '2.25rem', fontWeight: 'bold', color: '#1e293b' },
+    headerActions: { display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1rem' },
+    buttonHeader: { backgroundColor: 'white', color: '#334155', fontWeight: 600, padding: '0.5rem 1rem', border: '1px solid #cbd5e1', borderRadius: '0.5rem', boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)', fontSize: '0.875rem', display: 'flex', alignItems: 'center', cursor: 'pointer', transition: 'background-color 0.2s' },
+    buttonHeaderPrimary: { backgroundColor: '#334155', color: 'white' },
+    label: { display: 'block', fontSize: '0.875rem', fontWeight: 600, color: '#475569', marginBottom: '0.25rem' },
+    input: { width: '100%', borderRadius: '0.5rem', border: '1px solid #d1d5db', boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)', padding: '0.5rem 0.75rem', boxSizing: 'border-box' },
+    starRatingContainer: { display: 'flex', alignItems: 'center' },
+    star: { cursor: 'pointer', fontSize: '2rem' },
+    clearButton: { marginLeft: '0.5rem', fontSize: '0.75rem', color: '#64748b', background: 'none', border: 'none', cursor: 'pointer' },
+    genreList: { maxHeight: '12rem', overflowY: 'auto', paddingRight: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.5rem 1rem' },
+    checkboxContainer: { display: 'flex', alignItems: 'center' },
+    checkbox: { height: '1rem', width: '1rem', borderRadius: '0.25rem', border: '1px solid #d1d5db' },
+    checkboxLabel: { marginLeft: '0.5rem', fontSize: '0.875rem', color: '#475569' },
+    grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '2rem', marginTop: '2rem' },
+    emptyState: { backgroundColor: 'white', textAlign: 'center', padding: '3rem', borderRadius: '0.75rem', boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)', border: '1px solid #e5e7eb', marginTop: '2rem' },
+    emptyStateTitle: { fontSize: '1.25rem', fontWeight: 'bold', color: '#1e293b' },
+    emptyStateText: { color: '#64748b', marginTop: '0.5rem' },
+    pagination: { display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', marginTop: '2rem' },
+    paginationText: { fontSize: '0.875rem', color: '#475569', fontWeight: 500 },
+    card: { backgroundColor: 'white', borderRadius: '0.75rem', overflow: 'hidden', display: 'flex', flexDirection: 'column', transition: 'box-shadow 0.3s', border: '1px solid #e5e7eb' },
+    cardContent: { padding: '1.25rem', display: 'flex', flexDirection: 'column', flexGrow: 1, width: '100%' },
+    cardTitle: { fontSize: '1.25rem', fontWeight: 'bold', color: '#1e293b', flex: 1, paddingRight: '0.5rem' },
+    badge: { fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', padding: '0.25rem 0.5rem', borderRadius: '9999px', color: 'white' },
+    cardSubtitle: { fontSize: '0.875rem', color: '#64748b', marginBottom: '0.75rem' },
+    cardSummary: { color: '#475569', fontSize: '0.875rem', lineHeight: 1.6, flexGrow: 1 },
+    showMoreButton: { color: '#334155', fontWeight: 600, marginLeft: '0.25rem', background: 'none', border: 'none', cursor: 'pointer' },
+    infoBox: { marginTop: '1rem', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid', fontSize: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' },
+    cardActions: { backgroundColor: '#f8fafc', padding: '0.75rem 1.25rem', borderTop: '1px solid #e5e7eb', display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' },
+    buttonSmall: { fontSize: '0.875rem', backgroundColor: '#e2e8f0', color: '#334155', fontWeight: 600, padding: '0.25rem 0.75rem', borderRadius: '0.375rem', transition: 'background-color 0.2s', cursor: 'pointer', border: 'none' },
+    dropdownMenu: { position: 'absolute', right: 0, bottom: '100%', marginBottom: '0.5rem', width: '12rem', borderRadius: '0.375rem', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)', backgroundColor: 'white', zIndex: 20 },
+    headerDropdownMenu: { position: 'absolute', right: 0, top: '100%', marginTop: '0.5rem', width: '12rem', borderRadius: '0.375rem', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)', backgroundColor: 'white', zIndex: 20 },
+    dropdownItem: { display: 'block', padding: '0.5rem 1rem', fontSize: '0.875rem', color: '#374151', textDecoration: 'none' },
+    modalOverlay: { position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, padding: '1rem' },
+    modalContent: { backgroundColor: 'white', borderRadius: '0.75rem', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', width: '100%' },
+    modalHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem', borderBottom: '1px solid #e5e7eb' },
+    modalTitle: { fontSize: '1.25rem', fontWeight: 'bold', color: '#1e293b' },
+    closeButton: { color: '#9ca3af', background: 'none', border: 'none', fontSize: '2rem', cursor: 'pointer' },
+    modalActions: { display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid #e5e7eb' },
+    buttonPrimary: { backgroundColor: '#334155', color: 'white', fontWeight: 'bold', padding: '0.5rem 1rem', borderRadius: '0.5rem', transition: 'background-color 0.2s', border: 'none', cursor: 'pointer' },
+    buttonSecondary: { backgroundColor: '#e2e8f0', color: '#334155', fontWeight: 'bold', padding: '0.5rem 1rem', borderRadius: '0.5rem', transition: 'background-color 0.2s', border: 'none', cursor: 'pointer' },
+    formContainer: { backgroundColor: 'white', padding: '1.5rem', borderRadius: '0.75rem', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06)', marginBottom: '2rem', border: '1px solid #e5e7eb' },
+    formTitleFilter: { fontSize: '1.5rem', fontWeight: 'bold', color: '#1e293b', margin: '1.5rem', marginBottom: 0 },
+    formTitle: { fontSize: '1.5rem', fontWeight: 'bold', color: '#1e293b', marginBottom: '1.5rem' },
+    formGrid: { display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '1.5rem' },
+    settingsSectionTitle: { fontSize: '1.125rem', fontWeight: 600, color: '#334155', marginBottom: '0.5rem' },
+    colorInput: { width: '2.5rem', height: '2.5rem', padding: '0.25rem', border: 'none', borderRadius: '0.375rem', cursor: 'pointer' },
+    iconButton: { padding: '0.5rem', borderRadius: '0.375rem', background: 'none', border: 'none' },
+    filterCard: { backgroundColor: 'white', borderRadius: '0.75rem', boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)', border: '1px solid #e5e7eb', marginBottom: '2rem' },
+    filterCardHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', cursor: 'pointer' },
+    filterGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', padding: '1.5rem', paddingTop: 0 },
+    formActions: { display: 'flex', gap: '8px' }
+};
