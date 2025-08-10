@@ -9,6 +9,8 @@ tags: [linguistics, dyslexia-guides]
 
 Welcome! Frederick Bodmer's The Loom of Language is a classic guide to the world of linguistics, but its density can be challenging. This guide is designed to make the book more accessible, particularly for readers with dyslexia, by breaking it down into manageable steps with a special focus on learning German. Together, we'll explore how languages are born, change, and relate to one another, uncovering the patterns that make learning a new tongue more intuitive. By breaking the book into clear, bite-sized "missions," our goal is to help you learn without feeling overwhelmed.
 
+<!-- truncate -->
+
 - ISBN-10: 0-393-30034-X
 - ISBN-13: 978-0393-300345
 
