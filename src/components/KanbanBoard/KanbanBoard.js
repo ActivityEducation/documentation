@@ -375,78 +375,8 @@ const SettingsModal = ({
 
 const KanbanBoard = () => {
     // --- State Management ---
-    const [boardData, setBoardData] = useState(() => {
-        const storedData = localStorage.getItem("kanbanBoardData");
-        if (storedData) {
-            return JSON.parse(storedData);
-        }
-        return {
-            columns: {
-                "column-1": {
-                    id: "column-1",
-                    title: "To Do",
-                    taskIds: ["T-001", "T-002"],
-                },
-                "column-2": {
-                    id: "column-2",
-                    title: "In Progress",
-                    taskIds: ["T-003"],
-                },
-                "column-3": { id: "column-3", title: "Done", taskIds: [] },
-            },
-            tasks: {
-                "T-001": {
-                    id: "T-001",
-                    summary: "Build the time management tool",
-                    description:
-                        "Create a single React component that implements all the required features.",
-                    complexity: "high",
-                    tags: [],
-                    category: "Work",
-                    relatedTasks: [],
-                    checklist: [],
-                    dueDate: "2025-08-30",
-                    assignees: [],
-                    attachments: [],
-                    comments: [],
-                    archived: false,
-                },
-                "T-002": {
-                    id: "T-002",
-                    summary: "Plan weekend trip",
-                    description: "Research destinations and book accommodation.",
-                    complexity: "low",
-                    tags: [],
-                    category: "Personal",
-                    relatedTasks: [],
-                    checklist: [],
-                    dueDate: "2025-08-20",
-                    assignees: [],
-                    attachments: [],
-                    comments: [],
-                    archived: false,
-                },
-                "T-003": {
-                    id: "T-003",
-                    summary: 'Read "Dune" book',
-                    description:
-                        'Start reading the book "Dune" before the new movie comes out.',
-                    complexity: "medium",
-                    tags: [],
-                    category: "Personal",
-                    relatedTasks: [],
-                    checklist: [],
-                    dueDate: "2025-09-01",
-                    assignees: [],
-                    attachments: [],
-                    comments: [],
-                    archived: false,
-                },
-            },
-            topics: ["Work", "Personal", "Home Project"],
-            nextTaskId: 4,
-        };
-    });
+    // The initial state is now `null` to indicate a loading state
+    const [boardData, setBoardData] = useState(null);
 
     const [modalTask, setModalTask] = useState(null);
     const [filter, setFilter] = useState({ category: "All" });
@@ -462,14 +392,104 @@ const KanbanBoard = () => {
     const debouncedSave = useMemo(
         () =>
             debounce((data) => {
-                localStorage.setItem("kanbanBoardData", JSON.stringify(data));
+                if (typeof window !== "undefined" && window.localStorage) {
+                    localStorage.setItem("kanbanBoardData", JSON.stringify(data));
+                }
             }, 500),
         []
     );
 
+    // Use a single useEffect to load data from localStorage on mount and save on change
     useEffect(() => {
+        // Load data on the client side only
+        if (typeof window !== "undefined" && window.localStorage) {
+            const storedData = localStorage.getItem("kanbanBoardData");
+            if (storedData) {
+                setBoardData(JSON.parse(storedData));
+            } else {
+                // Initialize default data if nothing is stored
+                setBoardData({
+                    columns: {
+                        "column-1": {
+                            id: "column-1",
+                            title: "To Do",
+                            taskIds: ["T-001", "T-002"],
+                        },
+                        "column-2": {
+                            id: "column-2",
+                            title: "In Progress",
+                            taskIds: ["T-003"],
+                        },
+                        "column-3": { id: "column-3", title: "Done", taskIds: [] },
+                    },
+                    tasks: {
+                        "T-001": {
+                            id: "T-001",
+                            summary: "Build the time management tool",
+                            description:
+                                "Create a single React component that implements all the required features.",
+                            complexity: "high",
+                            tags: [],
+                            category: "Work",
+                            relatedTasks: [],
+                            checklist: [],
+                            dueDate: "2025-08-30",
+                            assignees: [],
+                            attachments: [],
+                            comments: [],
+                            archived: false,
+                        },
+                        "T-002": {
+                            id: "T-002",
+                            summary: "Plan weekend trip",
+                            description: "Research destinations and book accommodation.",
+                            complexity: "low",
+                            tags: [],
+                            category: "Personal",
+                            relatedTasks: [],
+                            checklist: [],
+                            dueDate: "2025-08-20",
+                            assignees: [],
+                            attachments: [],
+                            comments: [],
+                            archived: false,
+                        },
+                        "T-003": {
+                            id: "T-003",
+                            summary: 'Read "Dune" book',
+                            description:
+                                'Start reading the book "Dune" before the new movie comes out.',
+                            complexity: "medium",
+                            tags: [],
+                            category: "Personal",
+                            relatedTasks: [],
+                            checklist: [],
+                            dueDate: "2025-09-01",
+                            assignees: [],
+                            attachments: [],
+                            comments: [],
+                            archived: false,
+                        },
+                    },
+                    topics: ["Work", "Personal", "Home Project"],
+                    nextTaskId: 4,
+                });
+            }
+        }
+    }, []);
+
+    // Save data whenever boardData changes
+    useEffect(() => {
+      // Only run if boardData is not null (i.e., has been loaded)
+      if (boardData) {
         debouncedSave(boardData);
+      }
     }, [boardData, debouncedSave]);
+
+    // Render a loading state until the data is loaded from localStorage
+    if (!boardData) {
+        return <div>Loading...</div>;
+    }
 
     // --- Task and Board Actions ---
     const handleDragEnd = (result) => {
