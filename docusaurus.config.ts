@@ -157,6 +157,10 @@ const config: Config = {
               to: '/library',
             },
             {
+              label: 'Task Management Board',
+              to: '/kanban',
+            },
+            {
               label: 'EPub Studier',
               to: '/epub-viewer',
             },
