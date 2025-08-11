@@ -17,39 +17,42 @@ function applySettings() {
     const newClassArray = bodyClasses.split(' ').filter(c => !c.startsWith('font-') && c !== '');
     newClassArray.push(`font-${font}`);
     document.body.className = newClassArray.join(' ');
-  }, 50);
+  
+    // Apply font size
+    if (typeof window !== 'undefined') {
+      document.documentElement.style.fontSize = `${fontSize}px`;
+    }
 
-  // Apply font size
-  if (typeof window !== 'undefined') {
-    document.documentElement.style.fontSize = `${fontSize}px`;
-  }
+    // Apply high contrast
+    if (highContrast) {
+      document.body.classList.add('high-contrast');
+    } else {
+      document.body.classList.remove('high-contrast');
+    }
 
-  // Apply high contrast
-  if (highContrast) {
-    document.body.classList.add('high-contrast');
-  } else {
-    document.body.classList.remove('high-contrast');
-  }
+    // Apply highlight links
+    if (highlightLinks) {
+      document.body.classList.add('highlight-links');
+    } else {
+      document.body.classList.remove('highlight-links');
+    }
 
-  // Apply highlight links
-  if (highlightLinks) {
-    document.body.classList.add('highlight-links');
-  } else {
-    document.body.classList.remove('highlight-links');
-  }
-
-  // Apply grayscale
-  if (grayscale) {
-    document.documentElement.classList.add('grayscale');
-  } else {
-    document.documentElement.classList.remove('grayscale');
-  }
+    // Apply grayscale
+    if (grayscale) {
+      document.documentElement.classList.add('grayscale');
+      console.log('Grayscale class added to html:', document.documentElement.classList.contains('grayscale'));
+    } else {
+      document.documentElement.classList.remove('grayscale');
+      console.log('Grayscale class removed from html:', !document.documentElement.classList.contains('grayscale'));
+    }
+  }, 20);
 }
 
 export default function SettingsApplier() {
   const location = useLocation();
 
   useLayoutEffect(() => {
+    console.log('useLayoutEffect in SettingsApplier triggered by location change');
     applySettings();
   }, [location.pathname]);
 
