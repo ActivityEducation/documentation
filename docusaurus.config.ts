@@ -72,6 +72,7 @@ const config: Config = {
     mermaid: true,
   },
   themes: ['@docusaurus/theme-mermaid'],
+  
   themeConfig: {
     // Replace with your project's social card
     image: "img/docusaurus-social-card.jpg",
@@ -171,6 +172,10 @@ const config: Config = {
             {
               label: "Known Issues",
               to: "/issues",
+            },
+            {
+              label: "Website Setting",
+              to: "/settings",
             },
             {
               href: "https://design.edupub.social",

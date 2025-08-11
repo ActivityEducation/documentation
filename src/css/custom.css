@@ -14,7 +14,10 @@
   --ifm-color-primary-lighter: #8ab0cb;
   --ifm-color-primary-lightest: #a5cbe7;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-footer-background-color: #303846;
+  --ifm-footer-color: var(--ifm-footer-link-color);
+  --ifm-footer-link-color: var(--ifm-color-secondary);
+  --ifm-footer-title-color: var(--ifm-color-white);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -42,4 +45,38 @@ body {
 [data-theme="dark"] .hero,
 .hero {
   color: #04344a !important;
+}
+
+@import url('https://fonts.cdnfonts.com/css/opendyslexic');
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap');
+
+body.font-opendyslexic, body.font-opendyslexic * {
+  font-family: 'OpenDyslexic', sans-serif !important;
+}
+
+body.font-atkinson, body.font-atkinson * {
+  font-family: 'Atkinson Hyperlegible', sans-serif !important;
+}
+
+.high-contrast {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.high-contrast a {
+  color: #ffff00 !important;
+}
+
+.high-contrast .navbar {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.highlight-links a {
+  text-decoration: underline !important;
+  font-weight: bold;
+}
+
+html.grayscale {
+  filter: grayscale(100%);
 }

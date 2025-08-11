@@ -1,0 +1,22 @@
+.settingsContainer {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  padding: 1.5rem;
+  width: 100%;
+}
+
+.settingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.settingLabel {
+  font-weight: bold;
+}
+
+.settingControl select,
+.settingControl button {
+  margin-left: 0.5rem;
+}

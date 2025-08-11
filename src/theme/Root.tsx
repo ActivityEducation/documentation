@@ -1,6 +1,7 @@
 import React from 'react';
 // Import your ThemeProvider and theme object from your AscendUCore Design System package
 import { ThemeProvider, theme } from '@activityeducation/component-library'; // Adjust package name if different
+import SettingsApplier from '../components/SettingsApplier.js';
 
 function Root({ children }) {
   return (
@@ -14,6 +15,7 @@ function Root({ children }) {
         referrerPolicy="no-referrer"
       />
       {children}
+      <SettingsApplier />
     </ThemeProvider>
   );
 }
