@@ -22,11 +22,13 @@
     "@mdx-js/react": "^3.0.0",
     "axios": "^1.10.0",
     "clsx": "^2.0.0",
+    "epubjs": "^0.3.93",
     "firebase": "^12.1.0",
     "lucide-react": "^0.525.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-reader": "^2.0.13"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.8.1",

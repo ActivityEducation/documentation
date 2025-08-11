@@ -1,0 +1,292 @@
+:root {
+  --primary-blue: #007bff;
+  --primary-blue-dark: #0056b3;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #343a40;
+  --text-color: #212529;
+  --border-color: #dee2e6;
+  --white: #ffffff;
+  --red-error: #dc3545;
+}
+
+/* Main Container */
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  height: 90vh; /* Take up most of the viewport height */
+  background-color: var(--white);
+  border-radius: 12px;
+  overflow: hidden; /* Hide overflow from rounded corners */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle lift */
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Toolbar */
+.toolbar {
+  background-color: var(--light-gray);
+  padding: 15px 25px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center; /* Center content in toolbar */
+  align-items: center;
+  gap: 30px; /* Space between control groups */
+  flex-wrap: wrap; /* Allow controls to wrap on smaller screens */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+}
+
+.toolbarControls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.toolbarControls button {
+  background-color: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toolbarControls button:hover {
+  background-color: var(--primary-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.toolbarControls button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Content Container (Viewer + Sidebar) */
+.contentContainer {
+  display: grid;
+  grid-template-columns: 1fr minmax(280px, 350px); /* Flexible viewer, fixed-ish sidebar */
+  flex-grow: 1; /* Allow it to take remaining vertical space */
+}
+
+/* Viewer Column */
+.viewerColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 20px; /* Add some padding around the viewer */
+}
+
+.epubViewer {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px; /* Match container border-radius */
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05); /* Inner shadow for depth */
+}
+
+/* Controls Column (Sidebar) */
+.controlsColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background-color: var(--medium-gray);
+  border-left: 1px solid var(--border-color); /* Add a border to separate from viewer */
+  overflow-y: auto; /* Enable scrolling for the sidebar content */
+  min-width: 280px; /* Explicit minimum width */
+}
+
+/* File Input */
+.fileInput {
+  margin-bottom: 30px;
+  padding: 12px 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1em;
+  color: var(--text-color);
+  background-color: var(--white);
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fileInput:hover {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+/* Font Size Controls (now in toolbar) */
+.fontControls,
+.themeControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.fontControls button,
+.themeControls button {
+  flex-grow: 0;
+  padding: 8px 15px;
+  font-size: 0.9em;
+}
+
+.fontControls span {
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 0.95em;
+}
+
+/* Section Headings in Sidebar */
+.clippedContentSection h3,
+.tocSection h3 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: var(--dark-gray);
+  font-size: 1.4em;
+  font-weight: 700;
+  border-bottom: 2px solid var(--primary-blue);
+  padding-bottom: 10px;
+  width: 80%;
+}
+
+/* Clipped Content Section & TOC Section */
+.clippedContentSection,
+.tocSection {
+  margin-top: 30px;
+  width: 100%;
+  flex-grow: 0; /* Don't let them grow, let overflow handle it */
+  overflow-y: auto; /* Enable scrolling for content */
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.clippedContentSection ul,
+.tocSection ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tocSection li button {
+  background: none;
+  border: none;
+  color: var(--primary-blue);
+  cursor: pointer;
+  padding: 10px 0;
+  text-align: left;
+  width: 100%;
+  font-size: 1em;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.tocSection li button:hover {
+  color: var(--primary-blue-dark);
+  text-decoration: underline;
+}
+
+.clippedItem {
+  background-color: var(--light-gray);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column; /* Stack text and button */
+  gap: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clippedItem:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.clippedItem p {
+  margin: 0;
+  font-size: 0.95em;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.clippedItem small {
+  color: var(--dark-gray);
+  font-size: 0.75em;
+  align-self: flex-end; /* Align CFI to the right */
+}
+
+.removeButton {
+  background-color: var(--red-error);
+  color: var(--white);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  align-self: flex-end; /* Align button to the right */
+}
+
+.removeButton:hover {
+  background-color: #c82333;
+}
+
+/* Basic Responsiveness */
+@media (max-width: 768px) {
+  .mainContainer {
+    height: auto;
+  }
+
+  .contentContainer {
+    grid-template-columns: 1fr; /* Stack columns on smaller screens */
+  }
+
+  .viewerColumn {
+    height: 60vh; /* Give viewer more height on mobile */
+    padding: 15px;
+  }
+
+  .controlsColumn {
+    padding: 20px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .toolbarControls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .toolbarControls button {
+    width: 100%; /* Full width buttons on mobile toolbar */
+  }
+
+  .fontControls,
+  .themeControls {
+    width: 100%;
+  }
+
+  .clippedContentSection,
+  .tocSection {
+    padding: 15px;
+  }
+
+  .clippedContentSection h3,
+  .tocSection h3 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+}

@@ -156,6 +156,10 @@ const config: Config = {
               label: 'Personal Library Manager',
               to: '/library',
             },
+            {
+              label: 'EPub Studier',
+              to: '/epub-viewer',
+            },
           ]
         },
         {
